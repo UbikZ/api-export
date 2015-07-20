@@ -13,7 +13,7 @@ class Feed
     private $label;
     /** @var  string */
     private $url;
-    /** @var  int */
+    /** @var  FeedType */
     private $type;
     /** @var  \DateTime */
     private $updateDate;
@@ -69,7 +69,7 @@ class Feed
     }
 
     /**
-     * @return int
+     * @return FeedType
      */
     public function getType()
     {
@@ -77,9 +77,9 @@ class Feed
     }
 
     /**
-     * @param int $type
+     * @param FeedType $type
      */
-    public function setType($type)
+    public function setType(FeedType $type)
     {
         $this->type = $type;
     }

@@ -53,14 +53,14 @@ CREATE TABLE `feed` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) DEFAULT NULL,
   `url` varchar(255) NOT NULL,
-  `type` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_enabled` bit(1) NOT NULL DEFAULT b'0', 
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
-  KEY `type` (`type`),
-  INDEX (`type`, `update_date`, `is_enabled`),
-  CONSTRAINT `feed_ibfk_1` FOREIGN KEY (`type`) REFERENCES `feed_type` (`id`)
+  KEY `type_id` (`type_id`),
+  INDEX (`type_id`, `update_date`, `is_enabled`),
+  CONSTRAINT `feed_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `feed_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

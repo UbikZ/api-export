@@ -2,9 +2,7 @@
 
 namespace ApiExport\Module\App\Model\Helper;
 
-use ApiExport\Module\App\Model\DTO\FeedItem as DTOFeedItem;
-use ApiExport\Module\App\Model\DTO\Feed as DTOFeed;
-use ApiExport\Module\App\Model\DTO\FeedType as DTOFeedType;
+use ApiExport\Module\App\Model\DTO;
 
 /**
  * Class Feed.
@@ -14,11 +12,20 @@ class Feed
     /**
      * @param array $dal
      *
-     * @return DTOFeed
+     * @return DTO\Feed
      */
     public function getFeedFromDalToDTO(array $dal)
     {
-        $feed = new DTOFeed();
+        $feed = new DTO\Feed();
+        $feed->setId($dal['id']);
+        $feed->setLabel($dal['label']);
+        $feed->setUrl($dal['url']);
+
+        $feedType = new DTO\FeedType();
+        $feedType->setId($dal['type_id']);
+        $feed->setType($feedType);
+        $feed->setUpdateDate($dal['update_date']);
+        $feed->setEnabled($dal['is_enabled']);
 
         return $feed;
     }
@@ -26,18 +33,38 @@ class Feed
     /**
      * @param array $dal
      *
-     * @return DTOFeedItem
+     * @return DTO\FeedItem
      */
     public function getFeedItemFromDalToDTO(array $dal)
     {
-        $feedItem = new DTOFeedItem();
+        $feedItem = new DTO\FeedItem();
+        $feedItem->setId($dal['id']);
+
+        $feed = new DTO\Feed();
+        $feed->setId($dal['feed_id']);
+        $feedItem->setFeed($feed);
+        $feedItem->setHash($dal['hash']);
+        $feedItem->setTitle($dal['title']);
+        $feedItem->setCategories($dal['categories']);
+        $feedItem->setAuthorName($dal['author_name']);
+        $feedItem->setAuthorUri($dal['author_uri']);
+        $feedItem->setUrl($dal['url']);
+        $feedItem->setUpdateDate($dal['update_date']);
+        $feedItem->setResume($dal['resume']);
+        $feedItem->setExtract($dal['extract']);
+        $feedItem->setEnabled($dal['is_enabled']);
+        $feedItem->setViewed($dal['is_viewed']);
+        $feedItem->setApproved($dal['is_approved']);
 
         return $feedItem;
     }
 
     public function getFeedTypeFromDalToDTO(array $dal)
     {
-        $feedType = new DTOFeedType();
+        $feedType = new DTO\FeedType();
+        $feedType->setId($dal['id']);
+        $feedType->setLabel($dal['label']);
+        $feedType->setEnabled($dal['is_enabled']);
 
         return $feedType;
     }

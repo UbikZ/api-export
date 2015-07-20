@@ -9,8 +9,8 @@ class FeedItem
 {
     /** @var  int */
     private $id;
-    /** @var  int */
-    private $feedId;
+    /** @var  Feed */
+    private $feed;
     /** @var  string */
     private $hash;
     /** @var  string */
@@ -22,7 +22,7 @@ class FeedItem
     /** @var  string */
     private $authorUri;
     /** @var  string */
-    private $uri;
+    private $url;
     /** @var  \DateTime */
     private $updateDate;
     /** @var  string */
@@ -53,19 +53,19 @@ class FeedItem
     }
 
     /**
-     * @return int
+     * @return Feed
      */
-    public function getFeedId()
+    public function getFeed()
     {
-        return $this->feedId;
+        return $this->feed;
     }
 
     /**
-     * @param int $feedId
+     * @param Feed $feed
      */
-    public function setFeedId($feedId)
+    public function setFeed(Feed $feed)
     {
-        $this->feedId = $feedId;
+        $this->feed = $feed;
     }
 
     /**
@@ -151,17 +151,17 @@ class FeedItem
     /**
      * @return string
      */
-    public function getUri()
+    public function getUrl()
     {
-        return $this->uri;
+        return $this->url;
     }
 
     /**
-     * @param string $uri
+     * @param string $url
      */
-    public function setUri($uri)
+    public function setUrl($url)
     {
-        $this->uri = $uri;
+        $this->url = $url;
     }
 
     /**
