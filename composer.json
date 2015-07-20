@@ -8,6 +8,7 @@
   "authors":[],
   "require":{
     "php":">=5.4",
+    "sms/core":"dev-master",
     "igorw/config-service-provider": "v1.2.2",
     "monolog/monolog":"1.11.0",
     "silex/silex":"v1.2.2",
@@ -24,8 +25,8 @@
   },
   "autoload":{
     "psr-4":{
-      "Ubikz\\SMS\\": ["src/"],
-      "Ubikz\\SMS\\Tests\\": ["tests/"]
+      "ApiExport\\": ["src/"],
+      "ApiExport\\Tests\\": ["tests/"]
     }
   }
 }

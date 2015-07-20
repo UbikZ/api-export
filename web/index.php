@@ -1,6 +1,6 @@
 <?php
 
-use Ubikz\SMS\Core\Application;
+use SMS\Core\Application;
 
 defined('APPLICATION_ENV')
 || define('APPLICATION_ENV', getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'dev');

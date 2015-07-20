@@ -1,12 +1,11 @@
 <?php
 
-namespace Ubikz\SMS\Module\App\Controller;
+namespace ApiExport\Module\App\Controller;
 
-use Ubikz\SMS\Core\Controller\AbstractController;
+use SMS\Core\Controller\AbstractController;
 
 /**
  * Class IndexController
- * @package Ubikz\SMS\Module\App\Controller
  */
 class IndexController extends AbstractController
 {
