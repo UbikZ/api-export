@@ -3,9 +3,8 @@
 namespace ApiExport\Module\App\Model\Manager;
 
 /**
- * Class FeedItem
+ * Class FeedItem.
  */
 class FeedItem
 {
-
 }

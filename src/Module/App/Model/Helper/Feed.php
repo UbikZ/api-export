@@ -6,14 +6,14 @@ use ApiExport\Module\App\Model\DTO\FeedItem as DTOFeedItem;
 use ApiExport\Module\App\Model\DTO\Feed as DTOFeed;
 use ApiExport\Module\App\Model\DTO\FeedType as DTOFeedType;
 
-
 /**
- * Class Feed
+ * Class Feed.
  */
 class Feed
 {
     /**
      * @param array $dal
+     *
      * @return DTOFeed
      */
     public function getFeedFromDalToDTO(array $dal)
@@ -25,6 +25,7 @@ class Feed
 
     /**
      * @param array $dal
+     *
      * @return DTOFeedItem
      */
     public function getFeedItemFromDalToDTO(array $dal)

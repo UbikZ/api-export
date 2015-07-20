@@ -3,9 +3,8 @@
 namespace ApiExport\Module\App\Model\Dal;
 
 /**
- * Class Feed
+ * Class Feed.
  */
 class Feed
 {
-
 }

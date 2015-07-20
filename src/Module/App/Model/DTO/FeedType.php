@@ -3,7 +3,7 @@
 namespace ApiExport\Module\App\Model\DTO;
 
 /**
- * Class FeedType
+ * Class FeedType.
  */
 class FeedType
 {
@@ -47,7 +47,7 @@ class FeedType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -55,7 +55,7 @@ class FeedType
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setEnabled($isEnabled)
     {

@@ -3,7 +3,7 @@
 namespace ApiExport\Module\App\Model\DTO;
 
 /**
- * Class Feed
+ * Class Feed.
  */
 class Feed
 {
@@ -101,7 +101,7 @@ class Feed
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -109,7 +109,7 @@ class Feed
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setEnabled($isEnabled)
     {

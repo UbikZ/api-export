@@ -5,7 +5,7 @@ namespace ApiExport\Module\App\Controller;
 use SMS\Core\Controller\AbstractController;
 
 /**
- * Class IndexController
+ * Class IndexController.
  */
 class IndexController extends AbstractController
 {

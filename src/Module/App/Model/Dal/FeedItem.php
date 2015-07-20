@@ -3,9 +3,8 @@
 namespace ApiExport\Module\App\Model\Dal;
 
 /**
- * Class FeedItem
+ * Class FeedItem.
  */
 class FeedItem
 {
-
 }
