@@ -29,12 +29,8 @@ class FeedItem
     private $resume;
     /** @var  string */
     private $extract;
-    /** @var  bool */
-    private $isEnabled;
-    /** @var bool  */
-    private $isViewed;
-    /** @var bool  */
-    private $isApproved;
+    /** @var  int */
+    private $bitField;
 
     /**
      * @return int
@@ -213,50 +209,18 @@ class FeedItem
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isEnabled()
+    public function getBitField()
     {
-        return $this->isEnabled;
+        return $this->bitField;
     }
 
     /**
-     * @param bool $isEnabled
+     * @param int $bitField
      */
-    public function setEnabled($isEnabled)
+    public function setBitField($bitField)
     {
-        $this->isEnabled = boolval($isEnabled);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isViewed()
-    {
-        return $this->isViewed;
-    }
-
-    /**
-     * @param bool $isViewed
-     */
-    public function setViewed($isViewed)
-    {
-        $this->isViewed = boolval($isViewed);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isApproved()
-    {
-        return $this->isApproved;
-    }
-
-    /**
-     * @param bool $isApproved
-     */
-    public function setApproved($isApproved)
-    {
-        $this->isApproved = boolval($isApproved);
+        $this->bitField = intval($bitField);
     }
 }

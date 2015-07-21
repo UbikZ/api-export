@@ -25,11 +25,11 @@ class Feed
         $feedType->setId($dal['type_id']);
         if (isset($dal['ft_id'])) {
             $feedType->setLabel($dal['ft_label']);
-            $feedType->setEnabled($dal['ft_is_enabled']);
+            $feedType->setBitField($dal['ft_bitfield']);
         }
         $feed->setType($feedType);
         $feed->setUpdateDate($dal['update_date']);
-        $feed->setEnabled($dal['is_enabled']);
+        $feed->setBitField($dal['bitfield']);
 
         return $feed;
     }
@@ -56,9 +56,7 @@ class Feed
         $feedItem->setUpdateDate(new \DateTime($dal['update_date']));
         $feedItem->setResume($dal['resume']);
         $feedItem->setExtract($dal['extract']);
-        $feedItem->setEnabled($dal['is_enabled']);
-        $feedItem->setViewed($dal['is_viewed']);
-        $feedItem->setApproved($dal['is_approved']);
+        $feedItem->setBitField($dal['bitfield']);
 
         return $feedItem;
     }
@@ -73,7 +71,7 @@ class Feed
         $feedType = new DTO\FeedType();
         $feedType->setId($dal['id']);
         $feedType->setLabel($dal['label']);
-        $feedType->setEnabled($dal['is_enabled']);
+        $feedType->setBitField($dal['bitfield']);
 
         return $feedType;
     }
