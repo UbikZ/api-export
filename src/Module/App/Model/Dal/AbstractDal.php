@@ -18,4 +18,13 @@ abstract class AbstractDal
     {
         return Layout::database()->connect($useDbal);
     }
+
+    /**
+     * @param array $params
+     * @return array
+     */
+    public static function alias(array $params)
+    {
+        return array_map(function($el) { return sprintf('%s as %s', $el, str_replace('.', '_', $el)); }, $params);
+    }
 }

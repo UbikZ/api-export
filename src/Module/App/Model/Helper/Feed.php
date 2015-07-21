@@ -17,19 +17,18 @@ class Feed
     public static function getFeedFromDalToDTO(array $dal)
     {
         $feed = new DTO\Feed();
-        $feed->setId($dal['id']);
-        $feed->setLabel($dal['label']);
-        $feed->setUrl($dal['url']);
+        $feed->setId(self::get($dal, 'f_id'));
+        $feed->setLabel(self::get($dal, 'f_label'));
+        $feed->setUrl(self::get($dal, 'f_url'));
 
         $feedType = new DTO\FeedType();
-        $feedType->setId($dal['type_id']);
-        if (isset($dal['ft_id'])) {
-            $feedType->setLabel($dal['ft_label']);
-            $feedType->setBitField($dal['ft_bitfield']);
+        $feedType->setId(self::get($dal, 'f_type_id'));
+        if (self::get($dal, 'ft_id')) {
+            $feedType = self::getFeedTypeFromDalToDTO($dal);
         }
         $feed->setType($feedType);
-        $feed->setUpdateDate($dal['update_date']);
-        $feed->setBitField($dal['bitfield']);
+        $feed->setUpdateDate(self::get($dal, 'f_update_date'));
+        $feed->setBitField(self::get($dal, 'f_bitfield'));
 
         return $feed;
     }
@@ -42,21 +41,24 @@ class Feed
     public static function getFeedItemFromDalToDTO(array $dal)
     {
         $feedItem = new DTO\FeedItem();
-        $feedItem->setId(intval($dal['id']));
+        $feedItem->setId(self::get($dal, 'fi_id'));
 
         $feed = new DTO\Feed();
-        $feed->setId($dal['feed_id']);
+        $feed->setId(self::get($dal, 'fi_feed_id'));
+        if (self::get($dal, 'f_id')) {
+            $feed = self::getFeedFromDalToDTO($dal);
+        }
         $feedItem->setFeed($feed);
-        $feedItem->setHash($dal['hash']);
-        $feedItem->setTitle($dal['title']);
-        $feedItem->setCategories($dal['categories']);
-        $feedItem->setAuthorName($dal['author_name']);
-        $feedItem->setAuthorUri($dal['author_uri']);
-        $feedItem->setUrl($dal['url']);
-        $feedItem->setUpdateDate(new \DateTime($dal['update_date']));
-        $feedItem->setResume($dal['resume']);
-        $feedItem->setExtract($dal['extract']);
-        $feedItem->setBitField($dal['bitfield']);
+        $feedItem->setHash(self::get($dal, 'fi_hash'));
+        $feedItem->setTitle(self::get($dal, 'fi_title'));
+        $feedItem->setCategories(self::get($dal, 'fi_categories'));
+        $feedItem->setAuthorName(self::get($dal, 'fi_author_name'));
+        $feedItem->setAuthorUri(self::get($dal, 'fi_author_uri'));
+        $feedItem->setUrl(self::get($dal, 'fi_url'));
+        $feedItem->setUpdateDate(self::get($dal, 'fi_update_date'));
+        $feedItem->setResume(self::get($dal, 'fi_resume'));
+        $feedItem->setExtract(self::get($dal, 'fi_extract'));
+        $feedItem->setBitField(self::get($dal, 'fi_bitfield'));
 
         return $feedItem;
     }
@@ -69,10 +71,20 @@ class Feed
     public static function getFeedTypeFromDalToDTO(array $dal)
     {
         $feedType = new DTO\FeedType();
-        $feedType->setId($dal['id']);
-        $feedType->setLabel($dal['label']);
-        $feedType->setBitField($dal['bitfield']);
+        $feedType->setId(self::get($dal, 'ft_id'));
+        $feedType->setLabel(self::get($dal, 'ft_label'));
+        $feedType->setBitField(self::get($dal, 'ft_bitfield'));
 
         return $feedType;
+    }
+
+    /**
+     * @param $elements
+     * @param $key
+     * @return null
+     */
+    private function get($elements, $key)
+    {
+        return isset($elements[$key]) ? $elements[$key] : null;
     }
 }

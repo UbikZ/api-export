@@ -11,7 +11,7 @@ use SMS\Core\Exception\ErrorSQLStatementException;
 class Feed extends AbstractDal
 {
     const TABLE_NAME = 'feed';
-    const TABLE_BIT = 1; // 0001
+    const FETCH = 1; // 0001
 
     /**
      * @param DTO\Feed $feed
@@ -22,11 +22,11 @@ class Feed extends AbstractDal
     private static function getBaseSelect(DTO\Feed $feed, $lazyOptions = null)
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
-            ->select('f.*')
+            ->select(self::alias(['f.id', 'f.label', 'f.url', 'f.type_id', 'f.update_date', 'f.bitfield']))
             ->from(self::TABLE_NAME, 'f');
-        if ($lazyOptions & FeedType::TABLE_BIT) {
+        if ($lazyOptions & FeedType::FETCH) {
             $queryBuilder
-                ->addSelect(['ft.id as ft_id', 'ft.label as ft_label', 'ft.bitfield as ft_bitfield'])
+                ->addSelect(self::alias(['ft.id', 'ft.label', 'ft.bitfield']))
                 ->join('f', 'feed_type', 'ft', 'f.type_id = ft.id');
         }
         if ($id = $feed->getId()) {

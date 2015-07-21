@@ -17,8 +17,8 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $filterFeed = new DTO\Feed();
-        $feeds = Manager\Feed::get($filterFeed, Dal\FeedType::TABLE_BIT);
+        $filterFeed = new DTO\FeedItem();
+        $feeds = Manager\FeedItem::get($filterFeed, Dal\Feed::FETCH | Dal\FeedType::FETCH);
         dump($feeds);
         die;
 
