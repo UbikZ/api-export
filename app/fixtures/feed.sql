@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `feed_type`;
 CREATE TABLE `feed_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) DEFAULT NULL,
-  `is_enabled` bit(1) NOT NULL DEFAULT b'0',
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   INDEX (`is_enabled`)
@@ -38,7 +38,7 @@ CREATE TABLE `feed_type` (
 
 LOCK TABLES `feed_type` WRITE;
 /*!40000 ALTER TABLE `feed_type` DISABLE KEYS */;
-INSERT INTO `feed_type` VALUES (1,'reddit',''),(2,'other','');
+INSERT INTO `feed_type` VALUES (1,'reddit',1),(2,'other',1);
 /*!40000 ALTER TABLE `feed_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -55,7 +55,7 @@ CREATE TABLE `feed` (
   `url` varchar(255) NOT NULL,
   `type_id` int(11) NOT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `is_enabled` bit(1) NOT NULL DEFAULT b'0', 
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT b'0', 
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   KEY `type_id` (`type_id`),
@@ -83,9 +83,9 @@ CREATE TABLE `feed_item` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `resume` text,
   `extract` text,
-  `is_enabled` bit(1) NOT NULL DEFAULT b'0',
-  `is_viewed` bit(1) NOT NULL DEFAULT b'0',
-  `is_approved` bit(1) NOT NULL DEFAULT b'0',
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT b'0',
+  `is_viewed` TINYINT(1) NOT NULL DEFAULT b'0',
+  `is_approved` TINYINT(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   UNIQUE KEY `unique_hash` (`hash`),

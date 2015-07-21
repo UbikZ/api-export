@@ -24,7 +24,7 @@ class Feed
         $feedType = new DTO\FeedType();
         $feedType->setId($dal['type_id']);
         $feed->setType($feedType);
-        $feed->setUpdateDate(new \DateTime($dal['update_date']));
+        $feed->setUpdateDate($dal['update_date']);
         $feed->setEnabled($dal['is_enabled']);
 
         return $feed;
@@ -38,7 +38,7 @@ class Feed
     public static function getFeedItemFromDalToDTO(array $dal)
     {
         $feedItem = new DTO\FeedItem();
-        $feedItem->setId($dal['id']);
+        $feedItem->setId(intval($dal['id']));
 
         $feed = new DTO\Feed();
         $feed->setId($dal['feed_id']);

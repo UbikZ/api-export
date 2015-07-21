@@ -27,7 +27,7 @@ class FeedType
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = intval($id);
     }
 
     /**
@@ -59,6 +59,6 @@ class FeedType
      */
     public function setEnabled($isEnabled)
     {
-        $this->isEnabled = $isEnabled;
+        $this->isEnabled = boolval($isEnabled);
     }
 }

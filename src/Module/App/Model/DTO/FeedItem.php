@@ -49,7 +49,7 @@ class FeedItem
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = intval($id);
     }
 
     /**
@@ -177,7 +177,7 @@ class FeedItem
      */
     public function setUpdateDate($updateDate)
     {
-        $this->updateDate = $updateDate;
+        $this->updateDate = new \DateTime($updateDate);
     }
 
     /**
@@ -225,7 +225,7 @@ class FeedItem
      */
     public function setEnabled($isEnabled)
     {
-        $this->isEnabled = $isEnabled;
+        $this->isEnabled = boolval($isEnabled);
     }
 
     /**
@@ -241,7 +241,7 @@ class FeedItem
      */
     public function setViewed($isViewed)
     {
-        $this->isViewed = $isViewed;
+        $this->isViewed = boolval($isViewed);
     }
 
     /**
@@ -257,6 +257,6 @@ class FeedItem
      */
     public function setApproved($isApproved)
     {
-        $this->isApproved = $isApproved;
+        $this->isApproved = boolval($isApproved);
     }
 }

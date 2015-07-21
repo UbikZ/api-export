@@ -33,7 +33,7 @@ class Feed
      */
     public function setId($id)
     {
-        $this->id = $id;
+        $this->id = intval($id);
     }
 
     /**
@@ -97,7 +97,7 @@ class Feed
      */
     public function setUpdateDate($updateDate)
     {
-        $this->updateDate = $updateDate;
+        $this->updateDate = new \DateTime($updateDate);
     }
 
     /**
@@ -113,6 +113,6 @@ class Feed
      */
     public function setEnabled($isEnabled)
     {
-        $this->isEnabled = $isEnabled;
+        $this->isEnabled = boolval($isEnabled);
     }
 }
