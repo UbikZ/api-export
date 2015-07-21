@@ -13,17 +13,17 @@ class Feed
 {
     /**
      * @param DTO\Feed $feed
-     *
+     * @param bool $lazy
      * @return DTO\Feed[]
-     *
      * @throws \SMS\Core\Exception\ErrorSQLStatementException
      */
-    public static function get(DTO\Feed $feed)
+    public static function get(DTO\Feed $feed, $lazy = true)
     {
         /** @var DTO\Feed[] $feeds */
         $feeds = [];
 
-        $results = Dal\Feed::get($feed);
+        $results = Dal\Feed::get($feed, $lazy);
+
         foreach ($results as $result) {
             $feeds[] = Helper\Feed::getFeedFromDalToDTO($result);
         }

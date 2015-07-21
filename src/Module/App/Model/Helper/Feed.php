@@ -23,6 +23,10 @@ class Feed
 
         $feedType = new DTO\FeedType();
         $feedType->setId($dal['type_id']);
+        if (isset($dal['ft_id'])) {
+            $feedType->setLabel($dal['ft_label']);
+            $feedType->setEnabled($dal['ft_is_enabled']);
+        }
         $feed->setType($feedType);
         $feed->setUpdateDate($dal['update_date']);
         $feed->setEnabled($dal['is_enabled']);
