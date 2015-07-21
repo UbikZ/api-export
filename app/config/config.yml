@@ -17,6 +17,7 @@ config.app:
        channels:            [controller, sql]
 
   database:
+    driver:   "%database_driver%"
     adapter:  "%database_adapter%"
     host:     "%database_host%"
     dbname:   "%database_name%"

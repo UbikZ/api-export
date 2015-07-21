@@ -18,7 +18,7 @@ class Feed
     /** @var  \DateTime */
     private $updateDate;
     /** @var bool  */
-    private $isEnabled = false;
+    private $isEnabled;
 
     /**
      * @return int

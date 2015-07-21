@@ -14,7 +14,7 @@ class Feed
      *
      * @return DTO\Feed
      */
-    public function getFeedFromDalToDTO(array $dal)
+    public static function getFeedFromDalToDTO(array $dal)
     {
         $feed = new DTO\Feed();
         $feed->setId($dal['id']);
@@ -24,7 +24,7 @@ class Feed
         $feedType = new DTO\FeedType();
         $feedType->setId($dal['type_id']);
         $feed->setType($feedType);
-        $feed->setUpdateDate($dal['update_date']);
+        $feed->setUpdateDate(new \DateTime($dal['update_date']));
         $feed->setEnabled($dal['is_enabled']);
 
         return $feed;
@@ -35,7 +35,7 @@ class Feed
      *
      * @return DTO\FeedItem
      */
-    public function getFeedItemFromDalToDTO(array $dal)
+    public static function getFeedItemFromDalToDTO(array $dal)
     {
         $feedItem = new DTO\FeedItem();
         $feedItem->setId($dal['id']);
@@ -49,7 +49,7 @@ class Feed
         $feedItem->setAuthorName($dal['author_name']);
         $feedItem->setAuthorUri($dal['author_uri']);
         $feedItem->setUrl($dal['url']);
-        $feedItem->setUpdateDate($dal['update_date']);
+        $feedItem->setUpdateDate(new \DateTime($dal['update_date']));
         $feedItem->setResume($dal['resume']);
         $feedItem->setExtract($dal['extract']);
         $feedItem->setEnabled($dal['is_enabled']);
@@ -59,7 +59,11 @@ class Feed
         return $feedItem;
     }
 
-    public function getFeedTypeFromDalToDTO(array $dal)
+    /**
+     * @param array $dal
+     * @return DTO\FeedType
+     */
+    public static function getFeedTypeFromDalToDTO(array $dal)
     {
         $feedType = new DTO\FeedType();
         $feedType->setId($dal['id']);

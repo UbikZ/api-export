@@ -30,11 +30,11 @@ class FeedItem
     /** @var  string */
     private $extract;
     /** @var  bool */
-    private $isEnabled = false;
+    private $isEnabled;
     /** @var bool  */
-    private $isViewed = false;
+    private $isViewed;
     /** @var bool  */
-    private $isApproved = false;
+    private $isApproved;
 
     /**
      * @return int

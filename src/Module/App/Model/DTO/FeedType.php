@@ -12,7 +12,7 @@ class FeedType
     /** @var  string */
     private $label;
     /** @var  bool */
-    private $isEnabled = false;
+    private $isEnabled;
 
     /**
      * @return int
