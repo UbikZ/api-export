@@ -12,7 +12,8 @@ class Feed extends AbstractDal
 {
     /**
      * @param DTO\Feed $feed
-     * @param bool $lazy
+     * @param bool     $lazy
+     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     private static function getBaseSelect(DTO\Feed $feed, $lazy = false)
@@ -43,8 +44,10 @@ class Feed extends AbstractDal
 
     /**
      * @param DTO\Feed $feed
-     * @param bool $lazy
+     * @param bool     $lazy
+     *
      * @return array
+     *
      * @throws ErrorSQLStatementException
      */
     public static function get(DTO\Feed $feed, $lazy = true)
