@@ -13,8 +13,10 @@ class FeedItem
 {
     /**
      * @param DTO\FeedItem $feedItem
-     * @param null $lazyOptions
+     * @param null         $lazyOptions
+     *
      * @return DTO\Feed[]
+     *
      * @throws \SMS\Core\Exception\ErrorSQLStatementException
      */
     public static function get(DTO\FeedItem $feedItem, $lazyOptions = null)
