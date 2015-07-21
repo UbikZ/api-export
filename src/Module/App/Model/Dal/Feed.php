@@ -12,6 +12,7 @@ class Feed extends AbstractDal
 {
     /**
      * @param DTO\Feed $feed
+     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     private static function getBaseSelect(DTO\Feed $feed)
@@ -37,7 +38,9 @@ class Feed extends AbstractDal
 
     /**
      * @param DTO\Feed $feed
+     *
      * @return array
+     *
      * @throws ErrorSQLStatementException
      */
     public static function get(DTO\Feed $feed)

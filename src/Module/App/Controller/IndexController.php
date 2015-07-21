@@ -18,7 +18,9 @@ class IndexController extends AbstractController
     {
         $filterFeed = new DTO\Feed();
         $feeds = Manager\Feed::get($filterFeed);
-        dump($feeds);die;
+        dump($feeds);
+        die;
+
         return $this->render();
     }
 }

@@ -61,6 +61,7 @@ class Feed
 
     /**
      * @param array $dal
+     *
      * @return DTO\FeedType
      */
     public static function getFeedTypeFromDalToDTO(array $dal)
