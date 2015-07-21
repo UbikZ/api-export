@@ -3,7 +3,7 @@
 namespace ApiExport\Module\App\Model\DTO;
 
 /**
- * Class BitField
+ * Class BitField.
  */
 class BitField
 {
