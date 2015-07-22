@@ -223,4 +223,12 @@ class FeedItem
     {
         $this->bitField = intval($bitField);
     }
+
+    /**
+     * @return array
+     */
+    public function toArray()
+    {
+        return ['id' => $this->id, 'extract' => $this->extract];
+    }
 }

@@ -14,7 +14,7 @@ config.app:
        path:                "%app_template_path%"
      logger:
        path:                "%app_log_path%"
-       channels:            [controller, sql]
+       channels:            [controller, sql_requests, sql_errors]
 
   database:
     driver:   "%database_driver%"

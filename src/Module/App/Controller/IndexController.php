@@ -17,11 +17,6 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $filterFeed = new DTO\FeedItem();
-        $feeds = Manager\FeedItem::get($filterFeed, Dal\Feed::FETCH | Dal\FeedType::FETCH);
-        dump($feeds);
-        die;
-
         return $this->render();
     }
 }

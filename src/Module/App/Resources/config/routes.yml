@@ -3,3 +3,7 @@ config.routes.app:
       pattern:  /
       defaults: { _controller: 'IndexController::indexAction' }
       method: GET
+  feedItem:
+      pattern:  /feed-item
+      defaults: { _controller: 'FeedItemController::getAction' }
+      method: GET

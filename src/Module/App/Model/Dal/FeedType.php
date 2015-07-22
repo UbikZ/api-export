@@ -3,7 +3,6 @@
 namespace ApiExport\Module\App\Model\Dal;
 
 use ApiExport\Module\App\Model\DTO;
-use SMS\Core\Exception\ErrorSQLStatementException;
 
 /**
  * Class FeedType.
@@ -14,40 +13,25 @@ class FeedType extends AbstractDal
     const FETCH = 4; // 0100
 
     /**
-     * @param DTO\FeedType $feedType
+     * @param DTO\Filter\FeedType $feedTypeFilter
      * @param null $lazyOptions
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
-    private static function getBaseSelect(DTO\FeedType $feedType, $lazyOptions = null)
+    public static function getBaseSelect($feedTypeFilter, $lazyOptions = null)
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->select('ft.*')
             ->from(self::TABLE_NAME, 'ft');
-        if ($id = $feedType->getId()) {
+        if ($id = $feedTypeFilter->id) {
             $queryBuilder->andWhere('ft.id = :id')->setParameter(':id', $id);
         }
-        if ($label = $feedType->getLabel()) {
+        if ($label = $feedTypeFilter->label) {
             $queryBuilder->andWhere('ft.label = :label')->setParameter(':label', $label);
         }
-        if (!is_null($bitField = $feedType->getBitField())) {
+        if ($bitField = $feedTypeFilter->bitField) {
             $queryBuilder->andWhere('ft.bitfield = :bitfield')->setParameter(':bitfield', $bitField);
         }
 
         return $queryBuilder;
-    }
-
-    /**
-     * @param DTO\FeedType $feedType
-     * @param null $lazyOptions
-     * @return array
-     * @throws ErrorSQLStatementException
-     */
-    public static function get(DTO\FeedType $feedType, $lazyOptions = null)
-    {
-        if (!($executed = self::getBaseSelect($feedType, $lazyOptions)->execute())) {
-            throw new ErrorSQLStatementException('DAL\FeedType::get() error');
-        }
-
-        return $executed->fetchAll();
     }
 }

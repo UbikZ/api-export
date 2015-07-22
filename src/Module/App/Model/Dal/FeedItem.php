@@ -3,7 +3,6 @@
 namespace ApiExport\Module\App\Model\Dal;
 
 use ApiExport\Module\App\Model\DTO;
-use SMS\Core\Exception\ErrorSQLStatementException;
 
 /**
  * Class FeedItem.
@@ -14,11 +13,11 @@ class FeedItem extends AbstractDal
     const FETCH = 2; // 0010
 
     /**
-     * @param DTO\FeedItem $feedItem
+     * @param DTO\Filter\FeedItem $feedItemFilter
      * @param null $lazyOptions
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
-    private static function getBaseSelect(DTO\FeedItem $feedItem, $lazyOptions = null)
+    public static function getBaseSelect($feedItemFilter, $lazyOptions = null)
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->select(self::alias(['fi.id', 'fi.feed_id', 'fi.hash', 'fi.update_date', 'fi.resume', 'fi.bitfield']))
@@ -34,32 +33,26 @@ class FeedItem extends AbstractDal
             }
         }
 
-        if ($id = $feedItem->getId()) {
+        if ($id = $feedItemFilter->id) {
             $queryBuilder->andWhere('fi.id = :id')->setParameter(':id', $id);
         }
-        if ($feedItem->getFeed() && ($label = $feedItem->getFeed()->getId())) {
-            $queryBuilder->andWhere('fi.feed_id = :feed_id')->setParameter(':feed_id', $label);
+        if ($feedId = $feedItemFilter->feedId) {
+            $queryBuilder->andWhere('fi.feed_id = :feed_id')->setParameter(':feed_id', $feedId);
         }
-
-        if (!is_null($bitField = $feedItem->getBitField())) {
+        if ($bitField = $feedItemFilter->bitField) {
             $queryBuilder->andWhere('fi.bitfield = :bitfield')->setParameter(':bitfield', $bitField);
+        }
+        if ($startDate = $feedItemFilter->startDate) {
+            $queryBuilder
+                ->andWhere('fi.update_date >= :start_date')
+                ->setParameter(':start_date', $startDate->format('Y-m-d'));
+        }
+        if ($endDate = $feedItemFilter->endDate) {
+            $queryBuilder
+                ->andWhere('fi.update_date <= :end_date')
+                ->setParameter(':end_date', $endDate->add(new \DateInterval('PT23H59M59S'))->format('Y-m-d H:i:s'));
         }
 
         return $queryBuilder;
-    }
-
-    /**
-     * @param DTO\FeedItem $feedItem
-     * @param null $lazyOptions
-     * @return array
-     * @throws ErrorSQLStatementException
-     */
-    public static function get(DTO\FeedItem $feedItem, $lazyOptions = null)
-    {
-        if (!($executed = self::getBaseSelect($feedItem, $lazyOptions)->execute())) {
-            throw new ErrorSQLStatementException('DAL\Feed::get() error');
-        }
-
-        return $executed->fetchAll();
     }
 }

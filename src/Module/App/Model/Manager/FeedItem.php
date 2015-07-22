@@ -12,24 +12,27 @@ use ApiExport\Module\App\Model\Helper;
 class FeedItem
 {
     /**
-     * @param DTO\FeedItem $feedItem
-     * @param null         $lazyOptions
+     * @param DTO\Filter\FeedItem $feedItem
+     * @param null $lazyOptions
      *
-     * @return DTO\Feed[]
+     * @param bool $toArray
+     *
+     * @return DTO\FeedItem[]
      *
      * @throws \SMS\Core\Exception\ErrorSQLStatementException
      */
-    public static function get(DTO\FeedItem $feedItem, $lazyOptions = null)
+    public static function get(DTO\Filter\FeedItem $feedItem, $lazyOptions = null, $toArray = false)
     {
-        /** @var DTO\Feed[] $feeds */
-        $feeds = [];
+        /** @var DTO\FeedItem[] $feeds */
+        $feedItems = [];
 
         $results = Dal\FeedItem::get($feedItem, $lazyOptions);
 
         foreach ($results as $result) {
-            $feeds[] = Helper\Feed::getFeedItemFromDalToDTO($result);
+            $feedItem = Helper\Feed::getFeedItemFromDalToDTO($result);
+            $feedItems[] = $toArray ? $feedItem->toArray() : $feedItem;
         }
 
-        return $feeds;
+        return $feedItems;
     }
 }
