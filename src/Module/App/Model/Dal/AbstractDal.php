@@ -23,7 +23,9 @@ abstract class AbstractDal implements InterfaceDal
 
     /**
      * @param QueryBuilder $queryBuilder
+     *
      * @return \Doctrine\DBAL\Driver\Statement|int|null
+     *
      * @throws ErrorSQLStatementException
      */
     public static function execute(QueryBuilder $queryBuilder)
@@ -33,10 +35,10 @@ abstract class AbstractDal implements InterfaceDal
             $executed = $queryBuilder->execute();
             Layout::logger('sql_requests')->info(strtr(
                 $queryBuilder->getSQL(),
-                array_map(function($el) { return "'".$el."'"; }, $queryBuilder->getParameters()))
+                array_map(function ($el) { return "'".$el."'"; }, $queryBuilder->getParameters()))
             );
         } catch (\PDOException $e) {
-            throw new ErrorSQLStatementException("", 0, $e);
+            throw new ErrorSQLStatementException('', 0, $e);
         }
 
         return $executed;
@@ -44,17 +46,20 @@ abstract class AbstractDal implements InterfaceDal
 
     /**
      * @param array $params
+     *
      * @return array
      */
     public static function alias(array $params)
     {
-        return array_map(function($el) { return sprintf('%s as %s', $el, str_replace('.', '_', $el)); }, $params);
+        return array_map(function ($el) { return sprintf('%s as %s', $el, str_replace('.', '_', $el)); }, $params);
     }
 
     /**
      * @param $filter
      * @param null $lazyOptions
+     *
      * @return array
+     *
      * @throws ErrorSQLStatementException
      */
     public static function get($filter, $lazyOptions = null)

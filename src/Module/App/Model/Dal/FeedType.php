@@ -14,7 +14,8 @@ class FeedType extends AbstractDal
 
     /**
      * @param DTO\Filter\FeedType $feedTypeFilter
-     * @param null $lazyOptions
+     * @param null                $lazyOptions
+     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     public static function getBaseSelect($feedTypeFilter, $lazyOptions = null)

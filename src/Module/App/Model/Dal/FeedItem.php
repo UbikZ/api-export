@@ -14,7 +14,8 @@ class FeedItem extends AbstractDal
 
     /**
      * @param DTO\Filter\FeedItem $feedItemFilter
-     * @param null $lazyOptions
+     * @param null                $lazyOptions
+     *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */
     public static function getBaseSelect($feedItemFilter, $lazyOptions = null)

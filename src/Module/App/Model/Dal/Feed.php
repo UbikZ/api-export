@@ -14,7 +14,7 @@ class Feed extends AbstractDal
 
     /**
      * @param DTO\Filter\Feed $feedFilter
-     * @param null     $lazyOptions
+     * @param null            $lazyOptions
      *
      * @return \Doctrine\DBAL\Query\QueryBuilder
      */

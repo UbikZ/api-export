@@ -5,7 +5,6 @@ namespace ApiExport\Module\App\Controller;
 use SMS\Core\Controller\AbstractController;
 use ApiExport\Module\App\Model\Manager;
 use ApiExport\Module\App\Model\DTO;
-use ApiExport\Module\App\Model\Dal;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,6 +14,7 @@ class FeedItemController extends AbstractController
 {
     /**
      * @param Request $request
+     *
      * @return int|null
      */
     private function getBitField(Request $request)
@@ -35,6 +35,7 @@ class FeedItemController extends AbstractController
 
     /**
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getAction(Request $request)

@@ -13,9 +13,8 @@ class FeedItem
 {
     /**
      * @param DTO\Filter\FeedItem $feedItem
-     * @param null $lazyOptions
-     *
-     * @param bool $toArray
+     * @param null                $lazyOptions
+     * @param bool                $toArray
      *
      * @return DTO\FeedItem[]
      *
@@ -23,7 +22,7 @@ class FeedItem
      */
     public static function get(DTO\Filter\FeedItem $feedItem, $lazyOptions = null, $toArray = false)
     {
-        /** @var DTO\FeedItem[] $feeds */
+        /* @var DTO\FeedItem[] $feeds */
         $feedItems = [];
 
         $results = Dal\FeedItem::get($feedItem, $lazyOptions);

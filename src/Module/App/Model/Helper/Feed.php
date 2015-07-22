@@ -81,7 +81,6 @@ class Feed
     /**
      * @param $elements
      * @param $key
-     * @return null
      */
     private function get($elements, $key)
     {
