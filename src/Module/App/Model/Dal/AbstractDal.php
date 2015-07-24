@@ -32,13 +32,13 @@ abstract class AbstractDal implements InterfaceDal
     {
         $executed = null;
         try {
-            $executed = $queryBuilder->execute();
             Layout::logger('sql_requests')->info(strtr(
-                $queryBuilder->getSQL(),
-                array_map(function ($el) { return "'".$el."'"; }, $queryBuilder->getParameters()))
+                    $queryBuilder->getSQL(),
+                    array_map(function ($el) { return "'".$el."'"; }, $queryBuilder->getParameters()))
             );
-        } catch (\PDOException $e) {
-            throw new ErrorSQLStatementException('', 0, $e);
+            $executed = $queryBuilder->execute();
+        } catch (\Exception $e) {
+            throw new ErrorSQLStatementException($e->getMessage(), $e->getCode(), $e);
         }
 
         return $executed;

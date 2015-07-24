@@ -38,7 +38,7 @@ CREATE TABLE `feed_type` (
 
 LOCK TABLES `feed_type` WRITE;
 /*!40000 ALTER TABLE `feed_type` DISABLE KEYS */;
-INSERT INTO `feed_type` VALUES (1,'reddit',1),(2,'other',1);
+INSERT INTO `feed_type` VALUES (1,'reddit',1),(2,'common',1);
 /*!40000 ALTER TABLE `feed_type` ENABLE KEYS */;
 UNLOCK TABLES;
 

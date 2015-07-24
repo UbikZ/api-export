@@ -8,7 +8,8 @@
   "authors":[],
   "require":{
     "php":">=5.4",
-    "sms/core":"dev-master"
+    "sms/core":"dev-master",
+    "fguillot/picofeed": "@stable"
   },
   "require-dev":{
     "phpunit/phpunit":"3.7.*",

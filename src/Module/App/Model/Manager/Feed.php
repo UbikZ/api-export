@@ -12,14 +12,14 @@ use ApiExport\Module\App\Model\Helper;
 class Feed
 {
     /**
-     * @param DTO\Feed $feed
+     * @param DTO\Filter\Feed $feed
      * @param null     $lazyOptions
      *
      * @return DTO\Feed[]
      *
      * @throws \SMS\Core\Exception\ErrorSQLStatementException
      */
-    public static function get(DTO\Feed $feed, $lazyOptions = null)
+    public static function get(DTO\Filter\Feed $feed, $lazyOptions = null)
     {
         /** @var DTO\Feed[] $feeds */
         $feeds = [];

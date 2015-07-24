@@ -56,4 +56,28 @@ class FeedItem extends AbstractDal
 
         return $queryBuilder;
     }
+
+    /**
+     * @param DTO\FeedItem[] $feedItems
+     */
+    public static function insert(array $feedItems)
+    {
+        $queryBuilder = self::getConn()->createQueryBuilder()
+            ->insert(self::TABLE_NAME);
+        foreach ($feedItems as $feedItem) {
+            $queryBuilder->values([
+                'feed_id'   =>  $feedItem->getFeed()->getId(),
+                'hash'      =>  $feedItem->getHash(),
+                'title'     =>  $feedItem->getTitle(),
+                'categories' =>  $feedItem->getCategories(),
+                'author_name'   =>  $feedItem->getAuthorName(),
+                'author_uri'    =>  $feedItem->getAuthorUri(),
+                'url'           =>  $feedItem->getUrl(),
+                'update_date'   =>  $feedItem->getUpdateDate(),
+                'extract'       =>  $feedItem->getExtract(),
+                'bitfield'      =>  $feedItem->getBitField(),
+            ]);
+            self::execute($queryBuilder);
+        }
+    }
 }

@@ -34,4 +34,12 @@ class FeedItem
 
         return $feedItems;
     }
+
+    /**
+     * @param DTO\FeedItem[] $feedItems
+     */
+    public static function insert(array $feedItems)
+    {
+        $return = Dal\FeedItem::insert($feedItems);
+    }
 }
