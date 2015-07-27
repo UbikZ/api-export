@@ -57,6 +57,12 @@ class FeedItemController extends AbstractController
         return $this->sendJson($feeds);
     }
 
+    public function updateAction(Request $request)
+    {
+        $feedItem = new DTO\FeedItem();
+        //$feedItem->setId($request->get)
+    }
+
     /**
      * @return bool
      *
@@ -66,7 +72,6 @@ class FeedItemController extends AbstractController
      */
     public function createAction()
     {
-        Request::setTrustedProxies(['127.0.0.1']);
         $items = Manager\FeedItem::get(new DTO\Filter\FeedItem());
         $hashList = array_map(function ($el) { return $el->getHash(); }, $items);
         $feeds = Manager\Feed::get(new DTO\Filter\Feed(), Dal\FeedType::FETCH);
@@ -93,8 +98,15 @@ class FeedItemController extends AbstractController
                 $parser = new Parser($dtoFeedItem->getResume(), $feed->getType()->getLabel());
                 $extract = $parser->parse();
                 $dtoFeedItem->setExtract(json_encode($extract));
-                if (count($extract) > 0 && !in_array($dtoFeedItem->getHash(), $hashList)) {
-                    $toBeInserted[] = $dtoFeedItem;
+                if (is_array($extract)) {
+                    foreach ($extract as $key => $oneExtract) {
+                        $dtoFeedItemCloned = clone $dtoFeedItem;
+                        $dtoFeedItemCloned->setHash($dtoFeedItem->getHash().'_'.$key);
+                        $dtoFeedItemCloned->setExtract($oneExtract);
+                        if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
+                            $toBeInserted[] = $dtoFeedItemCloned;
+                        }
+                    }
                 }
             }
         }
