@@ -3,9 +3,7 @@
 namespace ApiExport\Module\App\Business\Feed;
 
 use ApiExport\Module\App\Business\Feed\Exception\InvalidClassFeedParserException;
-use ApiExport\Module\App\Business\Feed\Exception\InvalidUrlFeedException;
 use ApiExport\Module\App\Business\Feed\Parser\InterfaceParser;
-use ApiExport\Module\App\Model\DTO;
 
 /**
  * Class Parser.
@@ -34,7 +32,9 @@ class Parser
     /**
      * @param null $type
      * @param bool $streamContent
+     *
      * @return array|mixed|null
+     *
      * @throws InvalidClassFeedParserException
      */
     public function parse($type = null, $streamContent = false)

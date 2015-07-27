@@ -28,6 +28,7 @@ abstract class AbstractParser implements InterfaceParser
 
     /**
      * @param $type
+     *
      * @return null|string|array
      */
     public function parse($type)
@@ -65,12 +66,14 @@ abstract class AbstractParser implements InterfaceParser
     /**
      * @param $url
      * @param $realType
+     *
      * @return mixed
      */
-    public abstract function parseStream($url, $realType);
+    abstract public function parseStream($url, $realType);
 
     /**
      * @param $url
+     *
      * @return $this|Http\EntityBodyInterface
      */
     protected function streamContent($url)

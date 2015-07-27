@@ -9,6 +9,7 @@ interface InterfaceParser
 {
     /**
      * @param $type
+     *
      * @return mixed|null|array
      */
     public function parse($type);
@@ -16,6 +17,7 @@ interface InterfaceParser
     /**
      * @param $url
      * @param $realType
+     *
      * @return mixed
      */
     public function parseStream($url, $realType);

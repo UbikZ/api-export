@@ -13,7 +13,7 @@ class Feed
 {
     /**
      * @param DTO\Filter\Feed $feed
-     * @param null     $lazyOptions
+     * @param null            $lazyOptions
      *
      * @return DTO\Feed[]
      *
