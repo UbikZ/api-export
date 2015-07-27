@@ -108,7 +108,7 @@ class FeedItem extends AbstractDal
             ->where('id = :id')
             ->setParameters([
                 ':bitfield' => $feedItem->getBitField(),
-                ':id' => $feedItem->getId()
+                ':id' => $feedItem->getId(),
             ]);
 
         self::execute($queryBuilder);
