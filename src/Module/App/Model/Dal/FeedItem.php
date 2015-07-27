@@ -94,4 +94,18 @@ class FeedItem extends AbstractDal
             self::execute($queryBuilder);
         }
     }
+
+    /**
+     * @param DTO\FeedItem $feedItem
+     * @throws \SMS\Core\Exception\ErrorSQLStatementException
+     */
+    public static function update(DTO\FeedItem $feedItem)
+    {
+        $queryBuilder = self::getConn()->createQueryBuilder()
+            ->update(self::TABLE_NAME)
+            ->set('bitfield', ':bitfield')
+            ->setParameter(':bitfield', $feedItem->getBitField());
+
+        self::execute($queryBuilder);
+    }
 }

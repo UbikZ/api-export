@@ -11,3 +11,8 @@ config.routes.app:
       pattern:  /create-items
       defaults: { _controller: 'FeedItemController::createAction' }
       method: GET
+  updateFeedItem:
+      pattern:  /update-item
+      defaults: { _controller: 'FeedItemController::updateAction' }
+      method: POST
+

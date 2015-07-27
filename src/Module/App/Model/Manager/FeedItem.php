@@ -42,4 +42,12 @@ class FeedItem
     {
         Dal\FeedItem::insert($feedItems);
     }
+
+    /**
+     * @param DTO\FeedItem $feedItem
+     */
+    public static function update($feedItem)
+    {
+        Dal\FeedItem::update($feedItem);
+    }
 }

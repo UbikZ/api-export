@@ -57,10 +57,26 @@ class FeedItemController extends AbstractController
         return $this->sendJson($feeds);
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     * @throws \Exception
+     */
     public function updateAction(Request $request)
     {
-        $feedItem = new DTO\FeedItem();
-        //$feedItem->setId($request->get)
+        $feedItemFilter = new DTO\Filter\FeedItem();
+        $feedItemFilter->id = $request->get('id');
+        $items = Manager\FeedItem::get($feedItemFilter);
+        if (!isset($items[0])) {
+            throw new \Exception('Feed Item `'.$feedItemFilter->id,'` not found.');
+        }
+        /** @var DTO\FeedItem $dtoItem */
+        $dtoItem = $items[0];
+        $dtoItem->setBitField($this->getBitField($request));
+
+        Manager\FeedItem::update($dtoItem);
+
+        return true;
     }
 
     /**
