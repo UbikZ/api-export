@@ -105,7 +105,11 @@ class FeedItem extends AbstractDal
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->update(self::TABLE_NAME)
             ->set('bitfield', ':bitfield')
-            ->setParameter(':bitfield', $feedItem->getBitField());
+            ->where('id = :id')
+            ->setParameters([
+                ':bitfield' => $feedItem->getBitField(),
+                ':id' => $feedItem->getId()
+            ]);
 
         self::execute($queryBuilder);
     }

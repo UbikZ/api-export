@@ -232,10 +232,10 @@ class FeedItem
         return [
             'id' => $this->id,
             'url' => $this->extract,
-            'enabled' => $this->bitField & BitField::ENABLED,
-            'viewed' => $this->bitField & BitField::VIEWED,
-            'approved' => $this->bitField & BitField::APPROVED,
-            'reposted' => $this->bitField & BitField::REPOSTED,
+            'enabled' => intval(($this->bitField & BitField::ENABLED) != 0),
+            'viewed' => intval(($this->bitField & BitField::VIEWED) != 0),
+            'approved' => intval(($this->bitField & BitField::APPROVED) != 0),
+            'reposted' => intval(($this->bitField & BitField::REPOSTED) != 0),
         ];
     }
 }

@@ -69,12 +69,12 @@ class FeedItemController extends AbstractController
         $feedItemFilter = new DTO\Filter\FeedItem();
         $feedItemFilter->id = $request->get('id');
         $items = Manager\FeedItem::get($feedItemFilter);
-        if (!isset($items[0])) {
-            throw new \Exception('Feed Item `'.$feedItemFilter->id, '` not found.');
+        if (!$feedItemFilter->id || !isset($items[0])) {
+            throw new \Exception('Feed Item `'.$feedItemFilter->id.'` not found.');
         }
         /** @var DTO\FeedItem $dtoItem */
         $dtoItem = $items[0];
-        $dtoItem->setBitField($this->getBitField($request));
+        $dtoItem->setBitField($this->getBitField($request, $dtoItem->getBitField()));
 
         Manager\FeedItem::update($dtoItem);
 
