@@ -40,6 +40,6 @@ class FeedItem
      */
     public static function insert(array $feedItems)
     {
-        $return = Dal\FeedItem::insert($feedItems);
+        Dal\FeedItem::insert($feedItems);
     }
 }

@@ -21,7 +21,9 @@ class FeedItem extends AbstractDal
     public static function getBaseSelect($feedItemFilter, $lazyOptions = null)
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
-            ->select(self::alias(['fi.id', 'fi.feed_id', 'fi.hash', 'fi.update_date', 'fi.resume', 'fi.bitfield']))
+            ->select(self::alias([
+                'fi.id', 'fi.feed_id', 'fi.hash', 'fi.update_date', 'fi.resume', 'fi.bitfield', 'fi.extract'
+            ]))
             ->from(self::TABLE_NAME, 'fi');
         if ($lazyOptions & Feed::FETCH) {
             $queryBuilder
@@ -62,21 +64,33 @@ class FeedItem extends AbstractDal
      */
     public static function insert(array $feedItems)
     {
-        $queryBuilder = self::getConn()->createQueryBuilder()
-            ->insert(self::TABLE_NAME);
+        $queryBuilder = self::getConn()->createQueryBuilder()->insert(self::TABLE_NAME);
         foreach ($feedItems as $feedItem) {
-            $queryBuilder->values([
-                'feed_id'   =>  $feedItem->getFeed()->getId(),
-                'hash'      =>  $feedItem->getHash(),
-                'title'     =>  $feedItem->getTitle(),
-                'categories' =>  $feedItem->getCategories(),
-                'author_name'   =>  $feedItem->getAuthorName(),
-                'author_uri'    =>  $feedItem->getAuthorUri(),
-                'url'           =>  $feedItem->getUrl(),
-                'update_date'   =>  $feedItem->getUpdateDate(),
-                'extract'       =>  $feedItem->getExtract(),
-                'bitfield'      =>  $feedItem->getBitField(),
-            ]);
+            $queryBuilder
+                ->values([
+                    'feed_id'       =>  ':feed_id',
+                    'hash'          =>  ':hash',
+                    'title'         =>  ':title',
+                    'categories'    =>  ':categories',
+                    'author_name'   =>  ':author_name',
+                    'author_uri'    =>  ':author_uri',
+                    'url'           =>  ':url',
+                    'update_date'   =>  ':update_date',
+                    'extract'       =>  ':extract',
+                    'bitfield'      =>  ':bitfield',
+                ])
+                ->setParameters([
+                    ':feed_id'      =>  $feedItem->getFeed()->getId(),
+                    ':hash'         =>  $feedItem->getHash(),
+                    ':title'        =>  $feedItem->getTitle(),
+                    ':categories'   =>  $feedItem->getCategories(),
+                    ':author_name'  =>  $feedItem->getAuthorName(),
+                    ':author_uri'   =>  $feedItem->getAuthorUri(),
+                    ':url'          =>  $feedItem->getUrl(),
+                    ':update_date'  =>  $feedItem->getUpdateDate(),
+                    ':extract'      =>  $feedItem->getExtract(),
+                    ':bitfield'     =>  $feedItem->getBitField(),
+                ]);
             self::execute($queryBuilder);
         }
     }

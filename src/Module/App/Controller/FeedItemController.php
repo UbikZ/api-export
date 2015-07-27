@@ -33,6 +33,9 @@ class FeedItemController extends AbstractController
         if ($request->get('approved', false)) {
             $bitField |= DTO\BitField::APPROVED;
         }
+        if ($request->get('reposted', false)) {
+            $bitField |= DTO\BitField::REPOSTED;
+        }
 
         return $bitField;
     }
@@ -55,15 +58,19 @@ class FeedItemController extends AbstractController
     }
 
     /**
+     * @return bool
+     * @throws \ApiExport\Module\App\Business\Feed\Exception\InvalidClassFeedParserException
      * @throws \PicoFeed\Parser\MalformedXmlException
      * @throws \PicoFeed\Reader\UnsupportedFeedFormatException
      */
     public function createAction()
     {
+        Request::setTrustedProxies(['127.0.0.1']);
         $items = Manager\FeedItem::get(new DTO\Filter\FeedItem());
         $hashList = array_map(function($el) { return $el->getHash(); }, $items);
         $feeds = Manager\Feed::get(new DTO\Filter\Feed(), Dal\FeedType::FETCH);
         $reader = new Reader();
+
         /** @var DTO\FeedItem[] $toBeInserted */
         $toBeInserted = [];
 
@@ -92,5 +99,7 @@ class FeedItemController extends AbstractController
         }
 
         Manager\FeedItem::insert($toBeInserted);
+
+        return true;
     }
 }

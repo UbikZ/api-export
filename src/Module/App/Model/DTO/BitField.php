@@ -10,6 +10,7 @@ class BitField
     const ENABLED = 1;  // 0001
     const VIEWED = 2;   // 0010
     const APPROVED = 4; // 0100
+    const REPOSTED = 8; // 1000
 
     /*
      * Methods

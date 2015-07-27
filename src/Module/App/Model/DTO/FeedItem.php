@@ -229,6 +229,6 @@ class FeedItem
      */
     public function toArray()
     {
-        return ['id' => $this->id, 'extract' => $this->extract];
+        return ['id' => $this->id, 'hash' => $this->hash, 'extract' => json_decode($this->extract)];
     }
 }
