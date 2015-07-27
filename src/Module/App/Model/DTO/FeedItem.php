@@ -230,12 +230,12 @@ class FeedItem
     public function toArray()
     {
         return [
-            'id'        => $this->id,
-            'url'       => $this->extract,
-            'enabled'   => $this->bitField & BitField::ENABLED,
-            'viewed'    => $this->bitField & BitField::VIEWED,
-            'approved'  => $this->bitField & BitField::APPROVED,
-            'reposted'  => $this->bitField & BitField::REPOSTED,
+            'id' => $this->id,
+            'url' => $this->extract,
+            'enabled' => $this->bitField & BitField::ENABLED,
+            'viewed' => $this->bitField & BitField::VIEWED,
+            'approved' => $this->bitField & BitField::APPROVED,
+            'reposted' => $this->bitField & BitField::REPOSTED,
         ];
     }
 }

@@ -97,6 +97,7 @@ class FeedItem extends AbstractDal
 
     /**
      * @param DTO\FeedItem $feedItem
+     *
      * @throws \SMS\Core\Exception\ErrorSQLStatementException
      */
     public static function update(DTO\FeedItem $feedItem)

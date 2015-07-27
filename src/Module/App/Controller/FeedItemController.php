@@ -59,7 +59,9 @@ class FeedItemController extends AbstractController
 
     /**
      * @param Request $request
+     *
      * @return bool
+     *
      * @throws \Exception
      */
     public function updateAction(Request $request)
@@ -68,7 +70,7 @@ class FeedItemController extends AbstractController
         $feedItemFilter->id = $request->get('id');
         $items = Manager\FeedItem::get($feedItemFilter);
         if (!isset($items[0])) {
-            throw new \Exception('Feed Item `'.$feedItemFilter->id,'` not found.');
+            throw new \Exception('Feed Item `'.$feedItemFilter->id, '` not found.');
         }
         /** @var DTO\FeedItem $dtoItem */
         $dtoItem = $items[0];
