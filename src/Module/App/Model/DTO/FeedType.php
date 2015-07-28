@@ -47,7 +47,7 @@ class FeedType
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isIsEnabled()
     {
@@ -55,7 +55,7 @@ class FeedType
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setIsEnabled($isEnabled)
     {

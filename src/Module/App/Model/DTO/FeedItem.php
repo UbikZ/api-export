@@ -215,7 +215,7 @@ class FeedItem
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEnabled()
     {
@@ -223,7 +223,7 @@ class FeedItem
     }
 
     /**
-     * @param boolean $isEnabled
+     * @param bool $isEnabled
      */
     public function setIsEnabled($isEnabled)
     {
@@ -231,7 +231,7 @@ class FeedItem
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isViewed()
     {
@@ -239,7 +239,7 @@ class FeedItem
     }
 
     /**
-     * @param boolean $isViewed
+     * @param bool $isViewed
      */
     public function setIsViewed($isViewed)
     {
@@ -247,7 +247,7 @@ class FeedItem
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isApproved()
     {
@@ -255,7 +255,7 @@ class FeedItem
     }
 
     /**
-     * @param boolean $isApproved
+     * @param bool $isApproved
      */
     public function setIsApproved($isApproved)
     {
@@ -263,7 +263,7 @@ class FeedItem
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isReposted()
     {
@@ -271,7 +271,7 @@ class FeedItem
     }
 
     /**
-     * @param boolean $isReposted
+     * @param bool $isReposted
      */
     public function setIsReposted($isReposted)
     {
