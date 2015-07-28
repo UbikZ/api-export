@@ -17,6 +17,6 @@ class Feed
     public $startDate;
     /** @var  \DateTime */
     public $endDate;
-    /** @var  int */
-    public $bitField;
+    /** @var  bool */
+    public $isEnabled;
 }

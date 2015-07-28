@@ -25,10 +25,10 @@ DROP TABLE IF EXISTS `feed_type`;
 CREATE TABLE `feed_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `label` varchar(255) DEFAULT NULL,
-  `bitfield` int(11) NOT NULL,
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
-  INDEX (`bitfield`)
+  INDEX (`is_enabled`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,11 +55,11 @@ CREATE TABLE `feed` (
   `url` varchar(255) NOT NULL,
   `type_id` int(11) NOT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `bitfield` int(11) NOT NULL,
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   KEY `type_id` (`type_id`),
-  INDEX (`type_id`, `update_date`, `bitfield`),
+  INDEX (`type_id`, `update_date`, `is_enabled`),
   CONSTRAINT `feed_ibfk_1` FOREIGN KEY (`type_id`) REFERENCES `feed_type` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,12 +83,15 @@ CREATE TABLE `feed_item` (
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `resume` text,
   `extract` text,
-  `bitfield` int(11) NOT NULL,
+  `is_enabled` TINYINT(1) NOT NULL DEFAULT 1,
+  `is_viewed` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_approved` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_reposted` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   UNIQUE KEY `unique_hash` (`hash`),
   KEY `feed_id` (`feed_id`),
-  INDEX (`hash`, `feed_id`, `bitfield`, `update_date`),
+  INDEX (`hash`, `feed_id`, `is_enabled`, `is_viewed`, `is_approved`, `is_reposted`, `update_date`),
   CONSTRAINT `feed_item_ibfk_1` FOREIGN KEY (`feed_id`) REFERENCES `feed` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

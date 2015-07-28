@@ -22,7 +22,16 @@ class FeedItem extends AbstractDal
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->select(self::alias([
-                'fi.id', 'fi.feed_id', 'fi.hash', 'fi.update_date', 'fi.resume', 'fi.bitfield', 'fi.extract',
+                'fi.id',
+                'fi.feed_id',
+                'fi.hash',
+                'fi.update_date',
+                'fi.resume',
+                'fi.extract',
+                'fi.is_enabled',
+                'fi.is_viewed',
+                'fi.is_approved',
+                'fi.is_reposted',
             ]))
             ->from(self::TABLE_NAME, 'fi');
         if ($lazyOptions & Feed::FETCH) {
@@ -42,8 +51,17 @@ class FeedItem extends AbstractDal
         if ($feedId = $feedItemFilter->feedId) {
             $queryBuilder->andWhere('fi.feed_id = :feed_id')->setParameter(':feed_id', $feedId);
         }
-        if ($bitField = $feedItemFilter->bitField) {
-            $queryBuilder->andWhere('fi.bitfield = :bitfield')->setParameter(':bitfield', $bitField);
+        if ($isEnabled = $feedItemFilter->isEnabled) {
+            $queryBuilder->andWhere('fi.is_enabled = :is_enabled')->setParameter(':is_enabled', $isEnabled);
+        }
+        if ($isViewed = $feedItemFilter->isViewed) {
+            $queryBuilder->andWhere('fi.is_viewed = :is_viewed')->setParameter(':is_viewed', $isViewed);
+        }
+        if ($isApproved = $feedItemFilter->isApproved) {
+            $queryBuilder->andWhere('fi.is_approved = :is_approved')->setParameter(':is_approved', $isEnabled);
+        }
+        if ($isReposted = $feedItemFilter->isReposted) {
+            $queryBuilder->andWhere('fi.is_reposted = :is_reposted')->setParameter(':is_reposted', $isEnabled);
         }
         if ($startDate = $feedItemFilter->startDate) {
             $queryBuilder
@@ -77,7 +95,10 @@ class FeedItem extends AbstractDal
                     'url' => ':url',
                     'update_date' => ':update_date',
                     'extract' => ':extract',
-                    'bitfield' => ':bitfield',
+                    'is_enabled' => ':is_enabled',
+                    'is_viewed' => ':is_viewed',
+                    'is_approved' => ':is_approved',
+                    'is_reposted' => ':is_reposted',
                 ])
                 ->setParameters([
                     ':feed_id' => $feedItem->getFeed()->getId(),
@@ -89,7 +110,10 @@ class FeedItem extends AbstractDal
                     ':url' => $feedItem->getUrl(),
                     ':update_date' => $feedItem->getUpdateDate(),
                     ':extract' => $feedItem->getExtract(),
-                    ':bitfield' => $feedItem->getBitField(),
+                    ':is_enabled' => $feedItem->isEnabled(),
+                    ':is_viewed' => $feedItem->isViewed(),
+                    ':is_approved' => $feedItem->isApproved(),
+                    ':is_reposted' => $feedItem->isReposted(),
                 ]);
             self::execute($queryBuilder);
         }
@@ -104,10 +128,16 @@ class FeedItem extends AbstractDal
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->update(self::TABLE_NAME)
-            ->set('bitfield', ':bitfield')
+            ->set('is_enabled', ':is_enabled')
+            ->set('is_viewed', ':is_viewed')
+            ->set('is_approved', ':is_approved')
+            ->set('is_reposted', ':is_reposted')
             ->where('id = :id')
             ->setParameters([
-                ':bitfield' => $feedItem->getBitField(),
+                ':is_enabled' => $feedItem->isEnabled(),
+                ':is_viewed' => $feedItem->isViewed(),
+                ':is_approved' => $feedItem->isApproved(),
+                ':is_reposted' => $feedItem->isReposted(),
                 ':id' => $feedItem->getId(),
             ]);
 

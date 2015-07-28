@@ -28,7 +28,7 @@ class Feed
         }
         $feed->setType($feedType);
         $feed->setUpdateDate(self::get($dal, 'f_update_date'));
-        $feed->setBitField(self::get($dal, 'f_bitfield'));
+        $feed->setIsEnabled(self::get($dal, 'f_is_enabled'));
 
         return $feed;
     }
@@ -58,7 +58,10 @@ class Feed
         $feedItem->setUpdateDate(self::get($dal, 'fi_update_date'));
         $feedItem->setResume(self::get($dal, 'fi_resume'));
         $feedItem->setExtract(self::get($dal, 'fi_extract'));
-        $feedItem->setBitField(self::get($dal, 'fi_bitfield'));
+        $feedItem->setIsEnabled(self::get($dal, 'fi_is_enabled'));
+        $feedItem->setIsViewed(self::get($dal, 'fi_is_viewed'));
+        $feedItem->setIsApproved(self::get($dal, 'fi_is_approved'));
+        $feedItem->setIsReposted(self::get($dal, 'fi_is_reposted'));
 
         return $feedItem;
     }
@@ -73,7 +76,7 @@ class Feed
         $feedType = new DTO\FeedType();
         $feedType->setId(self::get($dal, 'ft_id'));
         $feedType->setLabel(self::get($dal, 'ft_label'));
-        $feedType->setBitField(self::get($dal, 'ft_bitfield'));
+        $feedType->setIsEnabled(self::get($dal, 'ft_is_enabled'));
 
         return $feedType;
     }

@@ -17,6 +17,12 @@ class FeedItem
     public $startDate;
     /** @var  \DateTime */
     public $endDate;
-    /** @var  int */
-    public $bitField;
+    /** @var  bool */
+    public $isEnabled;
+    /** @var  bool */
+    public $isViewed;
+    /** @var  bool */
+    public $isApproved;
+    /** @var  bool */
+    public $isReposted;
 }

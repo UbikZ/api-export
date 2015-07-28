@@ -29,8 +29,14 @@ class FeedItem
     private $resume;
     /** @var  string */
     private $extract;
-    /** @var  int */
-    private $bitField;
+    /** @var  bool */
+    private $isEnabled = true;
+    /** @var  bool */
+    private $isViewed = false;
+    /** @var  bool */
+    private $isApproved = false;
+    /** @var  bool */
+    private $isReposted = false;
 
     /**
      * @return int
@@ -209,19 +215,67 @@ class FeedItem
     }
 
     /**
-     * @return int
+     * @return boolean
      */
-    public function getBitField()
+    public function isEnabled()
     {
-        return $this->bitField;
+        return $this->isEnabled;
     }
 
     /**
-     * @param int $bitField
+     * @param boolean $isEnabled
      */
-    public function setBitField($bitField)
+    public function setIsEnabled($isEnabled)
     {
-        $this->bitField = intval($bitField);
+        $this->isEnabled = $isEnabled;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isViewed()
+    {
+        return $this->isViewed;
+    }
+
+    /**
+     * @param boolean $isViewed
+     */
+    public function setIsViewed($isViewed)
+    {
+        $this->isViewed = $isViewed;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isApproved()
+    {
+        return $this->isApproved;
+    }
+
+    /**
+     * @param boolean $isApproved
+     */
+    public function setIsApproved($isApproved)
+    {
+        $this->isApproved = $isApproved;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isReposted()
+    {
+        return $this->isReposted;
+    }
+
+    /**
+     * @param boolean $isReposted
+     */
+    public function setIsReposted($isReposted)
+    {
+        $this->isReposted = $isReposted;
     }
 
     /**
@@ -232,10 +286,10 @@ class FeedItem
         return [
             'id' => $this->id,
             'url' => $this->extract,
-            'enabled' => intval(($this->bitField & BitField::ENABLED) != 0),
-            'viewed' => intval(($this->bitField & BitField::VIEWED) != 0),
-            'approved' => intval(($this->bitField & BitField::APPROVED) != 0),
-            'reposted' => intval(($this->bitField & BitField::REPOSTED) != 0),
+            'enabled' => intval($this->isEnabled),
+            'viewed' => intval($this->isViewed),
+            'approved' => intval($this->isApproved),
+            'reposted' => intval($this->isReposted),
         ];
     }
 }

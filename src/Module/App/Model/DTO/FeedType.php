@@ -11,8 +11,8 @@ class FeedType
     private $id;
     /** @var  string */
     private $label;
-    /** @var  int */
-    private $bitField;
+    /** @var  bool */
+    private $isEnabled;
 
     /**
      * @return int
@@ -47,18 +47,18 @@ class FeedType
     }
 
     /**
-     * @return int
+     * @return boolean
      */
-    public function getBitField()
+    public function isIsEnabled()
     {
-        return $this->bitField;
+        return $this->isEnabled;
     }
 
     /**
-     * @param int $bitField
+     * @param boolean $isEnabled
      */
-    public function setBitField($bitField)
+    public function setIsEnabled($isEnabled)
     {
-        $this->bitField = intval($bitField);
+        $this->isEnabled = $isEnabled;
     }
 }

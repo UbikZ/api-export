@@ -21,11 +21,11 @@ class Feed extends AbstractDal
     public static function getBaseSelect($feedFilter, $lazyOptions = null)
     {
         $queryBuilder = self::getConn()->createQueryBuilder()
-            ->select(self::alias(['f.id', 'f.label', 'f.url', 'f.type_id', 'f.update_date', 'f.bitfield']))
+            ->select(self::alias(['f.id', 'f.label', 'f.url', 'f.type_id', 'f.update_date', 'f.is_enabled']))
             ->from(self::TABLE_NAME, 'f');
         if ($lazyOptions & FeedType::FETCH) {
             $queryBuilder
-                ->addSelect(self::alias(['ft.id', 'ft.label', 'ft.bitfield']))
+                ->addSelect(self::alias(['ft.id', 'ft.label', 'ft.is_enabled']))
                 ->join('f', 'feed_type', 'ft', 'f.type_id = ft.id');
         }
         if ($id = $feedFilter->id) {
@@ -37,8 +37,8 @@ class Feed extends AbstractDal
         if ($typeId = $feedFilter->typeId) {
             $queryBuilder->andWhere('f.type_id = :type_id')->setParameter(':type_id', $typeId);
         }
-        if ($bitField = $feedFilter->bitField) {
-            $queryBuilder->andWhere('f.bitfield = :bitfield')->setParameter(':bitfield', $bitField);
+        if ($isEnabled = $feedFilter->isEnabled) {
+            $queryBuilder->andWhere('f.is_enabled = :is_enabled')->setParameter(':is_enabled', $isEnabled);
         }
         if ($startDate = $feedFilter->startDate) {
             $queryBuilder

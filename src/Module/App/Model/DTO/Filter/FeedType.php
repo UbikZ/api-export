@@ -11,6 +11,6 @@ class FeedType
     public $id;
     /** @var  string */
     public $label;
-    /** @var  int */
-    public $bitField;
+    /** @var  bool */
+    public $isEnabled;
 }

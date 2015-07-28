@@ -29,8 +29,8 @@ class FeedType extends AbstractDal
         if ($label = $feedTypeFilter->label) {
             $queryBuilder->andWhere('ft.label = :label')->setParameter(':label', $label);
         }
-        if ($bitField = $feedTypeFilter->bitField) {
-            $queryBuilder->andWhere('ft.bitfield = :bitfield')->setParameter(':bitfield', $bitField);
+        if ($isEnabled = $feedTypeFilter->isEnabled) {
+            $queryBuilder->andWhere('ft.is_enabled = :is_enabled')->setParameter(':is_enabled', $isEnabled);
         }
 
         return $queryBuilder;

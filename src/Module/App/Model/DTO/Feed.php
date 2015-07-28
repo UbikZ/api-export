@@ -17,8 +17,8 @@ class Feed
     private $type;
     /** @var  \DateTime */
     private $updateDate;
-    /** @var  int */
-    private $bitField;
+    /** @var  bool */
+    private $isEnabled;
 
     /**
      * @return int
@@ -101,18 +101,18 @@ class Feed
     }
 
     /**
-     * @return int
+     * @return bool
      */
-    public function getBitField()
+    public function isEnabled()
     {
-        return $this->bitField;
+        return $this->isEnabled;
     }
 
     /**
-     * @param int $bitField
+     * @param $isEnabled
      */
-    public function setBitField($bitField)
+    public function setIsEnabled($isEnabled)
     {
-        $this->bitField = intval($bitField);
+        $this->isEnabled = $isEnabled;
     }
 }
