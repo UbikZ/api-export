@@ -51,17 +51,17 @@ class FeedItem extends AbstractDal
         if ($feedId = $feedItemFilter->feedId) {
             $queryBuilder->andWhere('fi.feed_id = :feed_id')->setParameter(':feed_id', $feedId);
         }
-        if ($isEnabled = $feedItemFilter->isEnabled) {
-            $queryBuilder->andWhere('fi.is_enabled = :is_enabled')->setParameter(':is_enabled', $isEnabled);
+        if (!is_null($isEnabled = $feedItemFilter->isEnabled)) {
+            $queryBuilder->andWhere('fi.is_enabled = :is_enabled')->setParameter(':is_enabled', intval($isEnabled));
         }
-        if ($isViewed = $feedItemFilter->isViewed) {
-            $queryBuilder->andWhere('fi.is_viewed = :is_viewed')->setParameter(':is_viewed', $isViewed);
+        if (!is_null($isViewed = $feedItemFilter->isViewed)) {
+            $queryBuilder->andWhere('fi.is_viewed = :is_viewed')->setParameter(':is_viewed', intval($isViewed));
         }
-        if ($isApproved = $feedItemFilter->isApproved) {
-            $queryBuilder->andWhere('fi.is_approved = :is_approved')->setParameter(':is_approved', $isEnabled);
+        if (!is_null($isApproved = $feedItemFilter->isApproved)) {
+            $queryBuilder->andWhere('fi.is_approved = :is_approved')->setParameter(':is_approved', intval($isApproved));
         }
-        if ($isReposted = $feedItemFilter->isReposted) {
-            $queryBuilder->andWhere('fi.is_reposted = :is_reposted')->setParameter(':is_reposted', $isEnabled);
+        if (!is_null($isReposted = $feedItemFilter->isReposted)) {
+            $queryBuilder->andWhere('fi.is_reposted = :is_reposted')->setParameter(':is_reposted', intval($isReposted));
         }
         if ($startDate = $feedItemFilter->startDate) {
             $queryBuilder
