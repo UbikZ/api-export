@@ -50,6 +50,7 @@ class Feed
         }
         $feedItem->setFeed($feed);
         $feedItem->setHash(self::get($dal, 'fi_hash'));
+        $feedItem->setOffset(self::get($dal, 'fi_offset'));
         $feedItem->setTitle(self::get($dal, 'fi_title'));
         $feedItem->setCategories(self::get($dal, 'fi_categories'));
         $feedItem->setAuthorName(self::get($dal, 'fi_author_name'));

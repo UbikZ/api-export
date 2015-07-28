@@ -25,6 +25,7 @@ class FeedItem extends AbstractDal
                 'fi.id',
                 'fi.feed_id',
                 'fi.hash',
+                'fi.offset',
                 'fi.update_date',
                 'fi.resume',
                 'fi.extract',
@@ -36,11 +37,11 @@ class FeedItem extends AbstractDal
             ->from(self::TABLE_NAME, 'fi');
         if ($lazyOptions & Feed::FETCH) {
             $queryBuilder
-                ->addSelect(self::alias(['f.id', 'f.label', 'f.url', 'f.update_date', 'f.bitfield']))
+                ->addSelect(self::alias(['f.id', 'f.label', 'f.url', 'f.update_date', 'f.is_enabled']))
                 ->join('fi', 'feed', 'f', 'f.id = fi.feed_id');
             if ($lazyOptions & FeedType::FETCH) {
                 $queryBuilder
-                    ->addSelect(self::alias(['ft.id', 'ft.label', 'ft.bitfield']))
+                    ->addSelect(self::alias(['ft.id', 'ft.label', 'ft.is_enabled']))
                     ->join('f', 'feed_type', 'ft', 'f.type_id = ft.id');
             }
         }
@@ -88,6 +89,7 @@ class FeedItem extends AbstractDal
                 ->values([
                     'feed_id' => ':feed_id',
                     'hash' => ':hash',
+                    'offset' => ':offset',
                     'title' => ':title',
                     'categories' => ':categories',
                     'author_name' => ':author_name',
@@ -103,6 +105,7 @@ class FeedItem extends AbstractDal
                 ->setParameters([
                     ':feed_id' => $feedItem->getFeed()->getId(),
                     ':hash' => $feedItem->getHash(),
+                    ':offset' => $feedItem->getOffset(),
                     ':title' => $feedItem->getTitle(),
                     ':categories' => $feedItem->getCategories(),
                     ':author_name' => $feedItem->getAuthorName(),

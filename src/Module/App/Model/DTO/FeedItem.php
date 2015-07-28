@@ -13,6 +13,8 @@ class FeedItem
     private $feed;
     /** @var  string */
     private $hash;
+    /** @var  int */
+    private $offset = 0;
     /** @var  string */
     private $title;
     /** @var  string */
@@ -279,6 +281,22 @@ class FeedItem
     }
 
     /**
+     * @return int
+     */
+    public function getOffset()
+    {
+        return $this->offset;
+    }
+
+    /**
+     * @param int $offset
+     */
+    public function setOffset($offset)
+    {
+        $this->offset = $offset;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -286,6 +304,8 @@ class FeedItem
         return [
             'id' => $this->id,
             'url' => $this->extract,
+            'hash' => $this->hash,
+            'offset' => $this->offset,
             'enabled' => intval($this->isEnabled),
             'viewed' => intval($this->isViewed),
             'approved' => intval($this->isApproved),

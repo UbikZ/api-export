@@ -75,6 +75,7 @@ CREATE TABLE `feed_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `feed_id` int(11) NOT NULL,
   `hash` varchar(255) NOT NULL,
+  `offset` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `categories` varchar(255) DEFAULT NULL,
   `author_name` varchar(255) DEFAULT NULL,
@@ -89,9 +90,8 @@ CREATE TABLE `feed_item` (
   `is_reposted` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
-  UNIQUE KEY `unique_hash` (`hash`),
   KEY `feed_id` (`feed_id`),
-  INDEX (`hash`, `feed_id`, `is_enabled`, `is_viewed`, `is_approved`, `is_reposted`, `update_date`),
+  INDEX (`hash`, `offset`, `feed_id`, `is_enabled`, `is_viewed`, `is_approved`, `is_reposted`, `update_date`),
   CONSTRAINT `feed_item_ibfk_1` FOREIGN KEY (`feed_id`) REFERENCES `feed` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
