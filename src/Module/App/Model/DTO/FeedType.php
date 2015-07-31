@@ -59,6 +59,6 @@ class FeedType
      */
     public function setIsEnabled($isEnabled)
     {
-        $this->isEnabled = $isEnabled;
+        $this->isEnabled = boolval($isEnabled);
     }
 }
