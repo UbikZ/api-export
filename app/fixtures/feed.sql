@@ -75,7 +75,7 @@ CREATE TABLE `feed_item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `feed_id` int(11) NOT NULL,
   `hash` varchar(255) NOT NULL,
-  `offset` int(11) NOT NULL,
+  `offset` int(11) NULL,
   `title` varchar(255) DEFAULT NULL,
   `categories` varchar(255) DEFAULT NULL,
   `author_name` varchar(255) DEFAULT NULL,

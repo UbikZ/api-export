@@ -98,10 +98,11 @@ class FeedItemController extends AbstractController
                 $extract = $parser->parse();
                 $dtoFeedItem->setExtract(json_encode($extract));
                 if (is_array($extract)) {
+                    $count = count($extract);
                     foreach ($extract as $key => $oneExtract) {
                         $dtoFeedItemCloned = clone $dtoFeedItem;
                         $dtoFeedItemCloned->setHash($dtoFeedItem->getHash());
-                        $dtoFeedItemCloned->setOffset($key);
+                        $dtoFeedItemCloned->setOffset($count > 1 ? $key : null);
                         $dtoFeedItemCloned->setExtract($oneExtract);
                         if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
                             $toBeInserted[] = $dtoFeedItemCloned;
