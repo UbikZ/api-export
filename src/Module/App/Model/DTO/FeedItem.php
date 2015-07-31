@@ -229,7 +229,7 @@ class FeedItem
      */
     public function setIsEnabled($isEnabled)
     {
-        $this->isEnabled = boolval($isEnabled);
+        $this->isEnabled = (bool)($isEnabled);
     }
 
     /**
@@ -245,7 +245,7 @@ class FeedItem
      */
     public function setIsViewed($isViewed)
     {
-        $this->isViewed = boolval($isViewed);
+        $this->isViewed = (bool)($isViewed);
     }
 
     /**
@@ -261,7 +261,7 @@ class FeedItem
      */
     public function setIsApproved($isApproved)
     {
-        $this->isApproved = boolval($isApproved);
+        $this->isApproved = (bool)($isApproved);
     }
 
     /**
@@ -277,7 +277,7 @@ class FeedItem
      */
     public function setIsReposted($isReposted)
     {
-        $this->isReposted = boolval($isReposted);
+        $this->isReposted = (bool)($isReposted);
     }
 
     /**

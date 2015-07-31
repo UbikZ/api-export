@@ -113,6 +113,6 @@ class Feed
      */
     public function setIsEnabled($isEnabled)
     {
-        $this->isEnabled = boolval($isEnabled);
+        $this->isEnabled = (bool)($isEnabled);
     }
 }
