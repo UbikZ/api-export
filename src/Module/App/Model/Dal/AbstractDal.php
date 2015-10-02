@@ -64,7 +64,7 @@ abstract class AbstractDal implements InterfaceDal
      */
     public static function get($filter, $lazyOptions = null)
     {
-        return self::execute(static::getBaseSelect($filter, $lazyOptions))->fetch();
+        return self::execute(static::getBaseSelect($filter, $lazyOptions))->fetchAll();
     }
 
     /**
