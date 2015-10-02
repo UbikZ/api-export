@@ -1,5 +1,8 @@
 "use strict";
 
+var originCSS = 'web/static/css/*.css',
+  originJS = 'web/static/js/**/*.js';
+
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
@@ -29,34 +32,33 @@ module.exports = function(grunt) {
           'web/static/dist/css/vendor.min.css': ['web/static/dist/css/vendor.css']
         }
       }
+    },
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: 'web/static/vendor/components-font-awesome/fonts',
+          src: ['*.*'],
+          dest: 'web/static/dist/fonts'
+        }]
+      }
     }
   });
 
   // Module static configuration (before concat)
   grunt.registerTask("prepareModules", "Finds and prepares modules for concatenation.", function() {
     var concat = grunt.config.get('concat') || {};
-    grunt.file.expand("src/Module/*").forEach(function (dir) {
-      var dirName = dir.substr(dir.lastIndexOf('/')+1);
 
-      concat[dirName+'_js'] = {
-        src: [dir + '/Resources/public/js/**/*.js'],
-        dest: 'web/static/js/' + dirName + '.js'
-      };
-
-      concat[dirName+'_css'] = {
-        src: [dir + '/Resources/public/css/*.css'],
-        dest: 'web/static/css/' + dirName + '.css'
-      };
-
-    });
+    // other stuffs
 
     concat['js'] = {
-      src: ['web/static/js/**/*.js'],
+      src: [originJS],
       dest: 'web/static/dist/js/application.js'
     };
 
     concat['css'] = {
-      src: ['web/static/css/*.css'],
+      src: [originCSS],
       dest: 'web/static/dist/css/application.css'
     };
 
@@ -67,7 +69,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-bower-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   // Default task(s).
-  grunt.registerTask('default', ['bower_concat', 'prepareModules', 'concat', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['copy', 'bower_concat', 'prepareModules', 'concat', 'uglify', 'cssmin']);
 };
