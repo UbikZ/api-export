@@ -64,6 +64,17 @@ abstract class AbstractDal implements InterfaceDal
      */
     public static function get($filter, $lazyOptions = null)
     {
-        return self::execute(static::getBaseSelect($filter, $lazyOptions))->fetchAll();
+        return self::execute(static::getBaseSelect($filter, $lazyOptions))->fetch();
+    }
+
+    /**
+     * @param $filter
+     * @param null $lazyOptions
+     * @return \Doctrine\DBAL\Driver\Statement|int|null
+     * @throws ErrorSQLStatementException
+     */
+    public static function getStmt($filter, $lazyOptions = null)
+    {
+        return self::execute(static::getBaseSelect($filter, $lazyOptions));
     }
 }

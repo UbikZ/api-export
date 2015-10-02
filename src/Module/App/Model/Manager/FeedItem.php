@@ -25,10 +25,10 @@ class FeedItem
         /* @var DTO\FeedItem[] $feeds */
         $feedItems = [];
 
-        $results = Dal\FeedItem::get($feedItem, $lazyOptions);
+        $results = Dal\FeedItem::getStmt($feedItem, $lazyOptions);
 
-        foreach ($results as $result) {
-            $feedItem = Helper\Feed::getFeedItemFromDalToDTO($result);
+        while ($row = $results->fetch()) {
+            $feedItem = Helper\Feed::getFeedItemFromDalToDTO($row);
             $feedItems[] = $toArray ? $feedItem->toArray() : $feedItem;
         }
 
