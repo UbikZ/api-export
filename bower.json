@@ -3,6 +3,7 @@
     "version": "0.0.1-dev",
     "dependencies": {
         "bootstrap": "3.3.4",
-        "components-font-awesome": "4.2.0"
+        "components-font-awesome": "4.2.0",
+        "morris.js": "0.5.1"
     }
 }
