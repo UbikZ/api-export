@@ -38,6 +38,21 @@ class FeedItemController extends AbstractController
 
     /**
      * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getStatisticsAction(Request $request)
+    {
+        return $this->sendJson([
+            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '256'],
+            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '123'],
+            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '301'],
+            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '299'],
+            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '145'],
+        ]);
+    }
+
+    /**
+     * @param Request $request
      *
      * @return bool
      *

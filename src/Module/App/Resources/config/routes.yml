@@ -7,6 +7,10 @@ config.routes.app:
       pattern:  /feed-item
       defaults: { _controller: 'FeedItemController::getAction' }
       method: GET
+  feedItemStat:
+      pattern:  /feed-item-stats
+      defaults: { _controller: 'FeedItemController::getStatisticsAction' }
+      method: GET
   createFeedItems:
       pattern:  /create-items
       defaults: { _controller: 'FeedItemController::createAction' }

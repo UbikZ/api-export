@@ -2,12 +2,12 @@ $(function () {
     "use strict";
 
   // Charts
-  var itemDayChart = new Morris.Line({
+  var itemDayChart = new Morris.Bar({
     element: 'item-by-day-chart',
     data: [],
-    xkey: 'year',
-    ykeys: ['value'],
-    labels: ['Value']
+    xkey: 'day',
+    ykeys: ['items'],
+    labels: ['Items added by day']
   });
 
   getData({}, itemDayChart);
