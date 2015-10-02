@@ -102,12 +102,14 @@ class FeedItemController extends AbstractController
                 if (is_array($extract)) {
                     $count = count($extract);
                     foreach ($extract as $key => $oneExtract) {
-                        $dtoFeedItemCloned = clone $dtoFeedItem;
-                        $dtoFeedItemCloned->setHash($dtoFeedItem->getHash());
-                        $dtoFeedItemCloned->setOffset($count > 1 ? $key : null);
-                        $dtoFeedItemCloned->setExtract($oneExtract);
-                        if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
-                            $toBeInserted[] = $dtoFeedItemCloned;
+                        if (!empty($oneExtract)) {
+                            $dtoFeedItemCloned = clone $dtoFeedItem;
+                            $dtoFeedItemCloned->setHash($dtoFeedItem->getHash());
+                            $dtoFeedItemCloned->setOffset($count > 1 ? $key : null);
+                            $dtoFeedItemCloned->setExtract($oneExtract);
+                            if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
+                                $toBeInserted[] = $dtoFeedItemCloned;
+                            }
                         }
                     }
                 }

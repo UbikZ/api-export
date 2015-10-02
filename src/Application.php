@@ -26,4 +26,12 @@ class Application extends Core\Application
             $this->handleException($e);
         }
     }
+
+    /***
+     * Turn fatal errors into exception.
+     */
+    protected function registerErrorHandler()
+    {
+        return true;
+    }
 }
