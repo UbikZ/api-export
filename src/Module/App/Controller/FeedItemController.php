@@ -72,8 +72,10 @@ class FeedItemController extends AbstractController
      */
     public function createAction()
     {
-        //$items = Manager\FeedItem::get(new DTO\Filter\FeedItem());
-        //$hashList = array_map(function ($el) { return $el->getHash(); }, $items);
+        $filterFeed = new DTO\Filter\FeedItem();
+        $filterFeed->startDate = new \DateTime();
+        $items = Manager\FeedItem::get($filterFeed);
+        $hashList = array_map(function ($el) { return $el->getHash(); }, $items);
         $feeds = Manager\Feed::get(new DTO\Filter\Feed(), Dal\FeedType::FETCH);
         $reader = new Reader();
 
@@ -104,9 +106,9 @@ class FeedItemController extends AbstractController
                         $dtoFeedItemCloned->setHash($dtoFeedItem->getHash());
                         $dtoFeedItemCloned->setOffset($count > 1 ? $key : null);
                         $dtoFeedItemCloned->setExtract($oneExtract);
-                        //if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
+                        if (!in_array($dtoFeedItemCloned->getHash(), $hashList)) {
                             $toBeInserted[] = $dtoFeedItemCloned;
-                        //}
+                        }
                     }
                 }
             }
