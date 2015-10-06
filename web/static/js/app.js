@@ -15,7 +15,7 @@ $(function () {
     data: [],
     xkey: 'label',
     ykeys: ['count'],
-    labels: ['Feed Label']
+    labels: ['Number']
   });
 
   getData({ url: "/feed-item-stats" }, itemDayChart);
