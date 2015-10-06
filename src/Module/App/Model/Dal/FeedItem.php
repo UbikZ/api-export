@@ -64,6 +64,7 @@ class FeedItem extends AbstractDal
 
         /** @var \DateTime $endDate */
         if ($endDate = $feedItemFilter->endDate) {
+            $endDate->setTime(0, 0);
             $queryBuilder
                 ->andWhere('fi.update_date <= :end_date')
                 ->setParameter(':end_date', $endDate->add(new \DateInterval('PT23H59M59S'))->format('Y-m-d H:i:s'));
