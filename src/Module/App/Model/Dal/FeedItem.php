@@ -90,6 +90,22 @@ class FeedItem extends AbstractDal
     }
 
     /**
+     * @return array
+     * @throws \SMS\Core\Exception\ErrorSQLStatementException
+     */
+    public static function countByFeed()
+    {
+        $queryBuilder = self::getConn()->createQueryBuilder()
+            ->select(['COUNT(fi.id) as count'])
+            ->from(self::TABLE_NAME, 'fi')
+            ->groupBy('f_label');
+
+        self::parseFilter($queryBuilder, new DTO\Filter\FeedItem(), Feed::FETCH);
+
+        return self::execute($queryBuilder)->fetchAll();
+    }
+
+    /**
      * @param DTO\Filter\FeedItem $feedItemFilter
      * @param null                $lazyOptions
      *

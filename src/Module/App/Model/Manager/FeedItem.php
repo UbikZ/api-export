@@ -62,6 +62,14 @@ class FeedItem
     }
 
     /**
+     * @return array
+     */
+    public static function countByFeed()
+    {
+        return Helper\Feed::countByFeedFromDalToArray(Dal\FeedItem::countByFeed());
+    }
+
+    /**
      * @param DTO\FeedItem[] $feedItems
      */
     public static function insert(array $feedItems)

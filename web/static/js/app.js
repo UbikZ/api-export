@@ -10,14 +10,22 @@ $(function () {
     labels: ['Items added by day', 'Items approved by day', 'Items reposted by day']
   });
 
-  getData({}, itemDayChart);
+  var feedChart = new Morris.Bar({
+    element: 'feed-chart',
+    data: [],
+    xkey: 'label',
+    ykeys: ['count'],
+    labels: ['Feed Label']
+  });
+
+  getData({ url: "/feed-item-stats" }, itemDayChart);
+  getData({ url: "/feed-stats" }, feedChart);
 
   function getData(filter, chartItem) {
     $.ajax({
       type: "GET",
       dataType: 'json',
-      url: "/feed-item-stats",
-      data: filter
+      url: filter.url
     })
       .done(function( data ) {
         chartItem.setData(data);

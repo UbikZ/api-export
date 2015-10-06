@@ -40,7 +40,7 @@ class FeedItemController extends AbstractController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getStatisticsAction(Request $request)
+    public function getStatisticsItemAction(Request $request)
     {
         $limit = $request->query->get('limit', 5);
         $filterFeed = new DTO\Filter\FeedItem();
@@ -68,8 +68,16 @@ class FeedItemController extends AbstractController
             ];
         }
 
-
         return $this->sendJson($result);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getStatisticsFeedAction(Request $request)
+    {
+        return $this->sendJson(Manager\FeedItem::countByFeed());
     }
 
     /**

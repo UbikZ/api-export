@@ -83,6 +83,20 @@ class Feed
 
     /**
      * @param array $dal
+     * @return array
+     */
+    public static function countByFeedFromDalToArray(array $dal)
+    {
+        $result = [];
+        foreach ($dal as $row) {
+            $result[] = ['count' => $row['count'], 'label' => $row['f_label']];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $dal
      *
      * @return DTO\FeedType
      */
