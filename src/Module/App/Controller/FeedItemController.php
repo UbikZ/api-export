@@ -52,14 +52,19 @@ class FeedItemController extends AbstractController
 
         $globalCount =  Manager\FeedItem::count('items', $filterFeed, $limit);
         $filterFeed->isApproved = true;
-        $specificCount = Manager\FeedItem::count('approved', $filterFeed, $limit);
+        $approvedCount = Manager\FeedItem::count('approved', $filterFeed, $limit);
+        $filterFeed->isApproved = false;
+        $filterFeed->isReposted = true;
+        $repostCount = Manager\FeedItem::count('reposted', $filterFeed, $limit);
+
 
         $result = [];
         foreach ($globalCount as $date => $element) {
             $result[] = [
                 'day' => $date,
                 'items' => $element['items'],
-                'approved' => isset($specificCount[$date]['approved']) ? $specificCount[$date]['approved'] : 0,
+                'approved' => isset($approvedCount[$date]['approved']) ? $approvedCount[$date]['approved'] : 0,
+                'reposted' => isset($repostCount[$date]['reposted']) ? $repostCount[$date]['reposted'] : 0,
             ];
         }
 

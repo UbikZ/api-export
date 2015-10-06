@@ -6,8 +6,8 @@ $(function () {
     element: 'item-by-day-chart',
     data: [],
     xkey: 'day',
-    ykeys: ['items', 'approved'],
-    labels: ['Items added by day', 'Items approved by day']
+    ykeys: ['items', 'approved', 'reposted'],
+    labels: ['Items added by day', 'Items approved by day', 'Items reposted by day']
   });
 
   getData({}, itemDayChart);
