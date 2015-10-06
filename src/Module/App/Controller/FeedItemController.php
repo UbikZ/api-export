@@ -54,7 +54,17 @@ class FeedItemController extends AbstractController
         $filterFeed->isApproved = true;
         $specificCount = Manager\FeedItem::count('approved', $filterFeed, $limit);
 
-        return $this->sendJson(array_merge_recursive($globalCount, $specificCount) );
+        $result = [];
+        foreach ($globalCount as $date => $element) {
+            $result[] = [
+                'day' => $date,
+                'items' => $element['items'],
+                'approved' => isset($specificCount[$date]['approved']) ? $specificCount[$date]['approved'] : 0,
+            ];
+        }
+
+
+        return $this->sendJson($result);
     }
 
     /**
