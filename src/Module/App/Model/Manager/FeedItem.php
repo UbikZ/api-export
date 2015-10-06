@@ -36,6 +36,32 @@ class FeedItem
     }
 
     /**
+     * @param $key
+     * @param DTO\Filter\FeedItem $feedItem
+     * @param $limit
+     * @param null $lazyOptions
+     * @return array
+     */
+    public static function count($key, DTO\Filter\FeedItem $feedItem, $limit, $lazyOptions = null)
+    {
+        $results = [];
+        for ($i = 0 ; $i < $limit ; $i++) {
+            $subNow = new \DateTime();
+            $subNow->sub(new \DateInterval(sprintf('P%dD', $i)));
+            $feedItem->startDate = $feedItem->endDate = $subNow;
+            $item =  Helper\Feed::countFeedItemFromDalToArray(
+                $key,
+                Dal\FeedItem::count($feedItem, $lazyOptions)
+            );
+            if ($item) {
+                $results[$item['day']] = $item;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * @param DTO\FeedItem[] $feedItems
      */
     public static function insert(array $feedItems)

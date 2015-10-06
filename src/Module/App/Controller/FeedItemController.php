@@ -42,13 +42,19 @@ class FeedItemController extends AbstractController
      */
     public function getStatisticsAction(Request $request)
     {
-        return $this->sendJson([
-            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '256'],
-            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '123'],
-            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '301'],
-            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '299'],
-            ['day' => (new \DateTIme())->format('d-m-Y'), 'items' => '145'],
-        ]);
+        $limit = $request->query->get('limit', 5);
+        $filterFeed = new DTO\Filter\FeedItem();
+        $filterFeed->isEnabled = $request->query->get('enabled');
+        $filterFeed->isApproved = $request->query->get('approved');
+        $filterFeed->isReposted = $request->query->get('reposted');
+        $filterFeed->isViewed = $request->query->get('viewed');
+        $filterFeed->endDate = new \DateTime();
+
+        $globalCount =  Manager\FeedItem::count('items', $filterFeed, $limit);
+        $filterFeed->isApproved = true;
+        $specificCount = Manager\FeedItem::count('approved', $filterFeed, $limit);
+
+        return $this->sendJson(array_merge_recursive($globalCount, $specificCount) );
     }
 
     /**

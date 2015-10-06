@@ -69,6 +69,20 @@ class Feed
 
     /**
      * @param array $dal
+     * @return array|null
+     */
+    public static function countFeedItemFromDalToArray($key, array $dal)
+    {
+        $result = null;
+        if ($dal['update_date']) {
+            $result = ['day' => (new \DateTime($dal['update_date']))->format('d-m-Y'), $key => $dal['count']];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param array $dal
      *
      * @return DTO\FeedType
      */
@@ -85,6 +99,7 @@ class Feed
     /**
      * @param $elements
      * @param $key
+     * @return null
      */
     private function get($elements, $key)
     {
