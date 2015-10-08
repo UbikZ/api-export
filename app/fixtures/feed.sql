@@ -83,6 +83,7 @@ CREATE TABLE `feed_item` (
   `url` varchar(255) DEFAULT NULL,
   `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `resume` text,
+  `comment` text,
   `extract` text,
   `is_enabled` TINYINT(1) NOT NULL DEFAULT 1,
   `is_viewed` TINYINT(1) NOT NULL DEFAULT 0,

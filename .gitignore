@@ -1,6 +1,7 @@
 vendor/
 composer.lock
 node_modules
+app/fixtures/feeds.sql
 web/static/dist
 web/static/vendor
 app/config/parameters.yml

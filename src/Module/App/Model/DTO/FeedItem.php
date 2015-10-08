@@ -30,6 +30,8 @@ class FeedItem
     /** @var  string */
     private $resume;
     /** @var  string */
+    private $comment;
+    /** @var  string */
     private $extract;
     /** @var  bool */
     private $isEnabled = true;
@@ -297,6 +299,22 @@ class FeedItem
     }
 
     /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -306,6 +324,7 @@ class FeedItem
             'url' => $this->extract,
             'hash' => $this->hash,
             'offset' => $this->offset,
+            'comment' => $this->comment,
             'enabled' => intval($this->isEnabled),
             'viewed' => intval($this->isViewed),
             'approved' => intval($this->isApproved),

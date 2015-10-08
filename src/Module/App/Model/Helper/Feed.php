@@ -49,6 +49,7 @@ class Feed
             $feed = self::getFeedFromDalToDTO($dal);
         }
         $feedItem->setFeed($feed);
+        $feedItem->setComment(self::get($dal, 'fi_comment'));
         $feedItem->setHash(self::get($dal, 'fi_hash'));
         $feedItem->setOffset(self::get($dal, 'fi_offset'));
         $feedItem->setTitle(self::get($dal, 'fi_title'));

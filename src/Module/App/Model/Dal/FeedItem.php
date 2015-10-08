@@ -116,6 +116,7 @@ class FeedItem extends AbstractDal
         $queryBuilder = self::getConn()->createQueryBuilder()
             ->select(self::alias([
                 'fi.id',
+                'fi.comment',
                 'fi.feed_id',
                 'fi.hash',
                 'fi.offset',
@@ -190,6 +191,7 @@ class FeedItem extends AbstractDal
             ->set('is_viewed', ':is_viewed')
             ->set('is_approved', ':is_approved')
             ->set('is_reposted', ':is_reposted')
+            ->set('comment', ':comment')
             ->where('id = :id')
             ->setParameters([
                 ':is_enabled' => $feedItem->isEnabled(),
@@ -197,6 +199,7 @@ class FeedItem extends AbstractDal
                 ':is_approved' => $feedItem->isApproved(),
                 ':is_reposted' => $feedItem->isReposted(),
                 ':id' => $feedItem->getId(),
+                ':comment' => $feedItem->getComment(),
             ]);
 
         self::execute($queryBuilder);

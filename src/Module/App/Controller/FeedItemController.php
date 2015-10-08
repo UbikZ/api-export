@@ -101,6 +101,7 @@ class FeedItemController extends AbstractController
         $dtoItem->setIsApproved($request->get('approved', $dtoItem->isApproved()));
         $dtoItem->setIsViewed($request->get('viewed', $dtoItem->isViewed()));
         $dtoItem->setIsReposted($request->get('reposted', $dtoItem->isReposted()));
+        $dtoItem->setComment($request->get('comment', $dtoItem->getComment()));
 
         Manager\FeedItem::update($dtoItem);
 
