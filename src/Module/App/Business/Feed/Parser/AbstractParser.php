@@ -35,31 +35,33 @@ abstract class AbstractParser implements InterfaceParser
     {
         $result = [];
 
-        $document = new \DOMDocument();
-        $document->loadHTML($this->content);
-        $aNodes = $document->getElementsByTagName('a');
-        foreach ($aNodes as $aNode) {
-            $link = $aNode->getAttribute('href');
-            if (false === strpos($link, $type)) {
-                if (preg_match(sprintf(self::EXT, implode('|', $this->allowedExtensions)), $link)) {
-                    $result[] = $link;
-                } else {
-                    $streamed = false;
-                    foreach ($this->streamDomains as $streamDomain) {
-                        if (strpos($link, $streamDomain)) {
-                            $parser = new Parser(null, $streamDomain, $link);
-                            $result = array_merge($result, $parser->parse(null, true));
-                            $streamed = true;
-                            break;
-                        }
-                    }
-                    if (!$streamed && !empty($link)) {
+        if ($this->content !== null && !empty($this->content)) {
+            $document = new \DOMDocument();
+            $document->loadHTML($this->content);
+            $aNodes = $document->getElementsByTagName('a');
+            foreach ($aNodes as $aNode) {
+                $link = $aNode->getAttribute('href');
+                if (false === strpos($link, $type)) {
+                    if (preg_match(sprintf(self::EXT, implode('|', $this->allowedExtensions)), $link)) {
                         $result[] = $link;
+                    } else {
+                        $streamed = false;
+                        foreach ($this->streamDomains as $streamDomain) {
+                            if (strpos($link, $streamDomain)) {
+                                $parser = new Parser(null, $streamDomain, $link);
+                                $result = array_merge($result, $parser->parse(null, true));
+                                $streamed = true;
+                                break;
+                            }
+                        }
+                        if (!$streamed && !empty($link)) {
+                            $result[] = $link;
+                        }
                     }
                 }
             }
         }
-
+        
         return $result;
     }
 
