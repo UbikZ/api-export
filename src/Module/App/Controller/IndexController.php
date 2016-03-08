@@ -3,6 +3,7 @@
 namespace ApiExport\Module\App\Controller;
 
 use SMS\Core\Controller\AbstractController;
+use ApiExport\Module\App\Model\DTO;
 
 /**
  * Class IndexController.
