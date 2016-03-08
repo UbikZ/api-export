@@ -18,7 +18,7 @@ class IndexController extends AbstractController
         return $this->render();
     }
 
-    public function viewAction()
+    public function viewAction(Request $request)
     {
       $filterFeed = new DTO\Filter\FeedItem();
       $filterFeed->id = $request->get('id');
