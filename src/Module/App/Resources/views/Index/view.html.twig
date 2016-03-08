@@ -15,7 +15,7 @@
                         <div class="panel-body">
                           {% if feed.url matches '{gfycat.com}' %}
                             <img class="lazyload img-responsive" data-sizes="auto"
-                                data-src="{{ feed.url|replace({'.gfycat': 'giant.gfycat'}) }}.gif"/>
+                                data-src="{{ feed.url|replace({'gfycat': 'giant.gfycat'}) }}.gif"/>
                           {% else %}
                             <img class="lazyload img-responsive" data-sizes="auto"
                                 data-src="{{ feed.url|replace({'.gifv': '.gif'}) }}"/>
