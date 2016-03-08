@@ -13,7 +13,13 @@
                             <h3 class="panel-title">Image</h3>
                         </div>
                         <div class="panel-body">
-                          <img class="lazyload img-responsive" data-sizes="auto" data-src="{{ feed.url }}"/>
+                          {% if string matches '{gfycat.com}' %}
+                            <img class="lazyload img-responsive" data-sizes="auto"
+                                data-src="{{ feed.url|replace({'.gfycat': 'giant.gfycat'}) }}.gif"/>
+                          {% else %}
+                            <img class="lazyload img-responsive" data-sizes="auto"
+                                data-src="{{ feed.url|replace({'.gifv': '.gif'}) }}"/>
+                          {% endif %}                          
                         </div>
                     </div>
                 </div>
