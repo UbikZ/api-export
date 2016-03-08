@@ -5,6 +5,8 @@ namespace ApiExport\Module\App\Controller;
 use SMS\Core\Controller\AbstractController;
 use ApiExport\Module\App\Model\DTO;
 
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * Class IndexController.
  */
