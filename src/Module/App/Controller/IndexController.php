@@ -24,7 +24,7 @@ class IndexController extends AbstractController
     public function viewAction(Request $request)
     {
       if (!$request->get('startDate')) {
-        throw new Exception("Use 'startDate' parameter to scale your search.");
+        throw new \Exception("Use 'startDate' parameter to scale your search.");
       }
       $filterFeed = new DTO\Filter\FeedItem();
       $filterFeed->id = $request->get('id');
