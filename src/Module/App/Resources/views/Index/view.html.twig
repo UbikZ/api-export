@@ -1,0 +1,19 @@
+{% extends "layout.html.twig" %}
+
+{% block body %}
+  {% for feed in feeds %}
+    {% if feed.respoted != 1 %}
+      <img class="lazyload" data-src="{{ feed.url }}" />
+      <legend>
+        <strong>ID :</strong>&nbsp;{{ feed.id }} |
+        <strong>Url :</strong>&nbsp;<a href="{{ feed.url }}">Here</a><br/>
+        <strong>Hash :</strong>&nbsp;{{ feed.hash }} |
+        <strong>Offset :</strong>&nbsp;{{ feed.offset }}<br/>
+        <strong>Enabled :</strong>&nbsp;{{ feed.enabled ? 'Yes' : 'No' }} |
+        <strong>Viewed :</strong>&nbsp;{{ feed.enabled ? 'Yes' : 'No' }} |
+        <strong>Approved :</strong>&nbsp;{{ feed.enabled ? 'Yes' : 'No' }}<br/>
+        <strong>Comment :</strong><br/>{{ feed.comment  }}<br/>
+      </legend>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

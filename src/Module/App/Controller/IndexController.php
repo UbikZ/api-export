@@ -16,4 +16,19 @@ class IndexController extends AbstractController
     {
         return $this->render();
     }
+
+    public function viewAction()
+    {
+      $filterFeed = new DTO\Filter\FeedItem();
+      $filterFeed->id = $request->get('id');
+      $filterFeed->isEnabled = $request->get('enabled');
+      $filterFeed->isApproved = $request->get('approved');
+      $filterFeed->isReposted = $request->get('reposted');
+      $filterFeed->isViewed = $request->get('viewed');
+      $filterFeed->startDate = $request->get('startDate') ? new \DateTime($request->get('startDate')) : null;
+      $filterFeed->endDate = $request->get('endDate') ? new \DateTime($request->get('endDate')) : null;
+      $feeds = Manager\FeedItem::get($filterFeed, null, true);
+
+      return $this->render(['feeds' => $feeds]);
+    }
 }

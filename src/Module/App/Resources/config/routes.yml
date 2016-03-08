@@ -3,6 +3,10 @@ config.routes.app:
       pattern:  /
       defaults: { _controller: 'IndexController::indexAction' }
       method: GET
+  view:
+      pattern:  /view
+      defaults: { _controller: 'IndexController::viewAction' }
+      method: GET
   feedItem:
       pattern:  /feed-item
       defaults: { _controller: 'FeedItemController::getAction' }
@@ -23,4 +27,3 @@ config.routes.app:
       pattern:  /update-item
       defaults: { _controller: 'FeedItemController::updateAction' }
       method: POST
-
