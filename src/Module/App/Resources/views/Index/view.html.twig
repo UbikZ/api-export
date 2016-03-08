@@ -2,7 +2,7 @@
 
 {% block body %}
   {% for feed in feeds %}
-    {% if feed.respoted != 1 %}
+    {% if feed.reposted != 1 %}
       <img class="lazyload" data-src="{{ feed.url }}" />
       <legend>
         <strong>ID :</strong>&nbsp;{{ feed.id }} |
