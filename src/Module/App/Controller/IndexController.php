@@ -29,7 +29,8 @@ class IndexController extends AbstractController
       $filterFeed->isApproved = $request->get('approved');
       $filterFeed->isReposted = $request->get('reposted');
       $filterFeed->isViewed = $request->get('viewed');
-      $filterFeed->startDate = new \DateTime();
+      $filterFeed->startDate = $request->get('startDate') ? new \DateTime($request->get('startDate')) : new DateTime();
+      $filterFeed->endDate = $request->get('endDate') ? new \DateTime($request->get('endDate')) : null;
       $feeds = Manager\FeedItem::get($filterFeed, null, true);
 
       return $this->render(['feeds' => $feeds]);
