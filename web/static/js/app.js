@@ -1,6 +1,6 @@
-$(function () {
-    "use strict";
+var App = App || {};
 
+App.loadCharts = function () {
   // Charts
   var itemDayChart = new Morris.Bar({
     element: 'item-by-day-chart',
@@ -18,8 +18,8 @@ $(function () {
     labels: ['Number']
   });
 
-  getData({ url: "/feed-item-stats" }, itemDayChart);
-  getData({ url: "/feed-stats" }, feedChart);
+  getData({url: "/feed-item-stats"}, itemDayChart);
+  getData({url: "/feed-stats"}, feedChart);
 
   function getData(filter, chartItem) {
     $.ajax({
@@ -27,15 +27,15 @@ $(function () {
       dataType: 'json',
       url: filter.url
     })
-      .done(function( data ) {
+      .done(function (data) {
         chartItem.setData(data);
       })
-      .fail(function() {
+      .fail(function () {
         console.info('Impossible to retrieve data');
       });
   }
+};
 
-  function remove(id) {
-    $('#' + id + ' img').remove();
-  }
-});
+App.loadCharts = function (id) {
+  $('#' + id + ' img').remove();
+};
