@@ -36,6 +36,6 @@ App.loadCharts = function () {
   }
 };
 
-App.loadCharts = function (id) {
+App.stopLoad = function (id) {
   $('#' + id + ' img').remove();
 };
