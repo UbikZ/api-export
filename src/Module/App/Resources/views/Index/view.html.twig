@@ -1,54 +1,56 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-  <div class="wrapper">
-    <div id="page-wrapper">
-        <div class="container-fluid">
-          {% for feed in feeds %}
-            {% if feed.reposted != 1 %}
-              <div class="row" id="{{ feed.hash }}">
-                <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Image</h3>
+    <div class="wrapper">
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                {% for feed in feeds %}
+                    {% if feed.reposted != 1 %}
+                        <div class="row" id="{{ feed.hash }}">
+                            <div class="col-lg-8">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Image</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        {% if feed.url matches '{//gfycat.com}' %}
+                                            <img class="lazyload img-responsive" data-sizes="auto"
+                                                 data-src="{{ feed.url|replace({'gfycat': 'giant.gfycat'}) }}.gif"/>
+                                        {% else %}
+                                            <img class="lazyload img-responsive" data-sizes="auto"
+                                                 data-src="{{ feed.url|replace({'.gifv': '.gif'}) }}"/>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Metadata</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p style="font-size: 1em;">
+                                            <strong>ID :</strong>&nbsp;{{ feed.id }} |
+                                            <strong>Url :</strong>&nbsp;<a href="{{ feed.url }}">Here</a> |
+                                            <strong>Actions :</strong>&nbsp;
+                                            <a href="#{{ feed.hash }}"
+                                               onclick="App.stopLoad('{{ feed.hash }}')">Stop Load</a><br/>
+                                            <strong>Hash :</strong>&nbsp;{{ feed.hash }}<br/>
+                                            <strong>Offset :</strong>&nbsp;{{ feed.offset }}<br/>
+                                            <strong>Enabled :</strong>&nbsp;{{ feed.enabled == 1 ? 'Yes' : 'No' }} |
+                                            <strong>Viewed :</strong>&nbsp;{{ feed.viewed == 1? 'Yes' : 'No' }} |
+                                            <strong>Approved :</strong>&nbsp;{{ feed.approved == 1? 'Yes' : 'No' }}<br/>
+                                            {% if feed.comment != '' %}
+                                                <strong>Comment :</strong><br/>{{ feed.comment }}<br/>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                          {% if feed.url matches '{//gfycat.com}' %}
-                            <img class="lazyload img-responsive" data-sizes="auto"
-                                data-src="{{ feed.url|replace({'gfycat': 'giant.gfycat'}) }}.gif"/>
-                          {% else %}
-                            <img class="lazyload img-responsive" data-sizes="auto"
-                                data-src="{{ feed.url|replace({'.gifv': '.gif'}) }}"/>
-                          {% endif %}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Metadata</h3>
-                        </div>
-                        <div class="panel-body">
-                          <p style="font-size: 1em;">
-                            <strong>ID :</strong>&nbsp;{{ feed.id }} |
-                            <strong>Url :</strong>&nbsp;<a href="{{ feed.url }}">Here</a> |
-                              <strong>Actions :</strong>&nbsp;<a href="#" onclick="App.stopLoad('{{ feed.hash }}')">Stop Load</a><br/>
-                            <strong>Hash :</strong>&nbsp;{{ feed.hash }}<br/>
-                            <strong>Offset :</strong>&nbsp;{{ feed.offset }}<br/>
-                            <strong>Enabled :</strong>&nbsp;{{ feed.enabled == 1 ? 'Yes' : 'No' }} |
-                            <strong>Viewed :</strong>&nbsp;{{ feed.viewed == 1? 'Yes' : 'No' }} |
-                            <strong>Approved :</strong>&nbsp;{{ feed.approved == 1? 'Yes' : 'No' }}<br/>
-                            {% if feed.comment != '' %}
-                              <strong>Comment :</strong><br/>{{ feed.comment  }}<br/>
-                            {% endif %}
-                          </p>
-                        </div>
-                    </div>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-  </div>
 {% endblock %}
