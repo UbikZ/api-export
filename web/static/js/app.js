@@ -34,4 +34,8 @@ $(function () {
         console.info('Impossible to retrieve data');
       });
   }
+
+  function remove(id) {
+    $('#' + id + ' img').remove();
+  }
 });
