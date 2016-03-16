@@ -80,7 +80,15 @@ abstract class AbstractParser implements InterfaceParser
      */
     protected function streamContent($url)
     {
-        return file_get_contents($url);
+        try {
+            if (false == $stream = file_get_contents($url)) {
+                $stream = '';
+            }
+        }  catch (\Exception $e) {
+            $stream = '';
+        }
+
+        return $stream;
     }
 
     /*
