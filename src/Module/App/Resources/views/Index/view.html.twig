@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block body %}
-    <div class="wrapper">
+    <div class="wrapper" onload="App.initViewer()">
         <div id="page-wrapper">
             <div class="container-fluid">
                 {% for feed in feeds %}

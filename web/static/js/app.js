@@ -36,6 +36,19 @@ App.loadCharts = function () {
   }
 };
 
+App.initViewer = function () {
+  $(document).scroll(function () {
+    var cutoff = $(window).scrollTop();
+
+    $('div .row').each(function () {
+      if ($(this).offset().top + $(this).height() > cutoff) {
+        location.hash = '#' + $(this).attr('id');
+        return false;
+      }
+    });
+  });
+};
+
 App.stopLoad = function (id) {
   $('#' + id + ' img').remove();
 };
