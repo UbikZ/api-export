@@ -82,10 +82,10 @@ abstract class AbstractParser implements InterfaceParser
     {
         try {
             if (false == $stream = file_get_contents($url)) {
-                $stream = '';
+                $stream = null;
             }
         }  catch (\Exception $e) {
-            $stream = '';
+            $stream = null;
         }
 
         return $stream;

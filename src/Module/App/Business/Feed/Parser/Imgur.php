@@ -16,17 +16,19 @@ class Imgur extends AbstractParser
     {
         $return = [];
         $parsedStream = $this->streamContent($url);
-        $document = new \DOMDocument();
-        $document->loadHTML($parsedStream);
+        if (!is_null($parsedStream)) {
+            $document = new \DOMDocument();
+            $document->loadHTML($parsedStream);
 
-        $finder = new \DOMXPath($document);
-        $images = $finder->query('//div[@class="wrapper"]/div/div/div/a');
-        if ($images instanceof \DOMNodeList) {
-            /** @var \DomElement $element */
-            foreach ($images as $element) {
-                $link = $element->getAttribute('href');
-                if (preg_match(sprintf(self::EXT, implode('|', $this->allowedExtensions)), $link)) {
-                    $return[] = $link;
+            $finder = new \DOMXPath($document);
+            $images = $finder->query('//div[@class="wrapper"]/div/div/div/a');
+            if ($images instanceof \DOMNodeList) {
+                /** @var \DomElement $element */
+                foreach ($images as $element) {
+                    $link = $element->getAttribute('href');
+                    if (preg_match(sprintf(self::EXT, implode('|', $this->allowedExtensions)), $link)) {
+                        $return[] = $link;
+                    }
                 }
             }
         }
