@@ -36,6 +36,14 @@ App.loadCharts = function () {
   }
 };
 
+App.open = function(urls) {
+  var listUrls = JSON.parse(urls) || [];
+
+  listUrls.forEach(function(url) {
+    window.open(url);
+  });
+};
+
 App.initViewer = function () {
   $(document).scroll(function () {
     var cutoff = $(window).scrollTop();
