@@ -7,7 +7,7 @@ config.routes.app:
       pattern:  /view
       defaults: { _controller: 'IndexController::viewAction' }
       method: GET
-  view:
+  open:
       pattern:  /open
       defaults: { _controller: 'IndexController::openAction' }
       method: GET
