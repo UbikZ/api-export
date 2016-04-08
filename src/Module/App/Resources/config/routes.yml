@@ -7,6 +7,10 @@ config.routes.app:
       pattern:  /view
       defaults: { _controller: 'IndexController::viewAction' }
       method: GET
+  view:
+      pattern:  /open
+      defaults: { _controller: 'IndexController::openAction' }
+      method: GET
   feedItem:
       pattern:  /feed-item
       defaults: { _controller: 'FeedItemController::getAction' }
