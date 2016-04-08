@@ -47,7 +47,7 @@ class IndexController extends AbstractController
         $feeds = Manager\FeedItem::get($filterFeed, null, true);
         $urlFeeds = array_map(function($object) {
             /** @var DTO\FeedItem $object */
-            return $object->getUrl();
+            return $object['url'];
         }, $feeds);
 
         return $this->render(['urls' => json_encode($urlFeeds)]);
