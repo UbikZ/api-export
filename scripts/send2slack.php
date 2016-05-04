@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Usage:
+ * php send2slack.php "http://xx.com" "#xx" "xx" "https://xx/hook"
+ */
+
 main($argc, $argv);
 
 function main($argc, $argv = array())
@@ -12,7 +17,7 @@ function main($argc, $argv = array())
             'icon_emoji' => ':underage:',
         ];
         $text = '';
-        $apiUrl = $argv[1] . '/feed-items?approved=1&sent=0';
+        $apiUrl = $argv[1] . '/feed-item?approved=1&sent=0';
         $feeds = json_decode(file_get_contents($apiUrl), true);
         foreach ($feeds as $feed) {
             $text .= $feed['url'] . ' ' . $feed['comment'] . PHP_EOL;
