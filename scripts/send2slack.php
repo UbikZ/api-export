@@ -18,7 +18,7 @@ function main($argc, $argv = array())
         ];
         $apiUrl = $argv[1] . '/feed-item?approved=1&sent=0';
         $feeds = json_decode(file_get_contents($apiUrl), true);
-        $text = 'Plop bitches (' . count($feeds) . 'links )';
+        $text = 'Plop bitches (*' . count($feeds) . ' links*)' . PHP_EOL;
         foreach ($feeds as $feed) {
             $id = $feed['id'];
             $text .= $feed['url'] . ' ' . $feed['comment'] . PHP_EOL;
