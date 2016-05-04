@@ -18,7 +18,7 @@ function main($argc, $argv = array())
         ];
         $apiUrl = $argv[1] . '/feed-item?approved=1&sent=0';
         $feeds = json_decode(file_get_contents($apiUrl), true);
-        $count = count($feeds),
+        $count = count($feeds);
         $text = 'Plop bitches (*' . $count . ' links*)' . PHP_EOL;
         if ($count > 0) {
             foreach ($feeds as $feed) {
