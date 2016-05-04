@@ -13,14 +13,16 @@ function main($argc, $argv = array())
         $payload = [
             'channel' => $argv[2],
             'username' => $argv[3],
-            'text' => 'Plop' . PHP_EOL,
+            'text' => '',
             'icon_emoji' => ':underage:',
         ];
-        $text = '';
         $apiUrl = $argv[1] . '/feed-item?approved=1&sent=0';
         $feeds = json_decode(file_get_contents($apiUrl), true);
+        $text = 'Plop bitches (' . count($feeds) . 'links )';
         foreach ($feeds as $feed) {
+            $id = $feed['id'];
             $text .= $feed['url'] . ' ' . $feed['comment'] . PHP_EOL;
+            exec("curl --data \"id=$id&sent=1\" $argv[1]/update");
         }
         $payload['text'] .= $text;
         $sendJson = json_encode($payload);
