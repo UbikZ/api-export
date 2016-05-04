@@ -1,62 +1,64 @@
-var App = App || {};
+$(document).ready(function() {
+  var App = App || {};
 
-App.loadCharts = function () {
-  // Charts
-  var itemDayChart = new Morris.Bar({
-    element: 'item-by-day-chart',
-    data: [],
-    xkey: 'day',
-    ykeys: ['items', 'approved', 'reposted'],
-    labels: ['Items added by day', 'Items approved by day', 'Items reposted by day']
-  });
-
-  var feedChart = new Morris.Bar({
-    element: 'feed-chart',
-    data: [],
-    xkey: 'label',
-    ykeys: ['count'],
-    labels: ['Number']
-  });
-
-  getData({url: "/feed-item-stats"}, itemDayChart);
-  getData({url: "/feed-stats"}, feedChart);
-
-  function getData(filter, chartItem) {
-    $.ajax({
-      type: "GET",
-      dataType: 'json',
-      url: filter.url
-    })
-      .done(function (data) {
-        chartItem.setData(data);
-      })
-      .fail(function () {
-        console.info('Impossible to retrieve data');
-      });
-  }
-};
-
-App.open = function(urls) {
-  var listUrls = JSON.parse(urls) || [];
-
-  listUrls.forEach(function(url) {
-    window.open(url);
-  });
-};
-
-App.initViewer = function () {
-  $(document).scroll(function () {
-    var cutoff = $(window).scrollTop();
-
-    $('div .row').each(function () {
-      if ($(this).offset().top + $(this).height() > cutoff) {
-        location.hash = '#' + $(this).attr('id');
-        return false;
-      }
+  App.loadCharts = function () {
+    // Charts
+    var itemDayChart = new Morris.Bar({
+      element: 'item-by-day-chart',
+      data: [],
+      xkey: 'day',
+      ykeys: ['items', 'approved', 'reposted'],
+      labels: ['Items added by day', 'Items approved by day', 'Items reposted by day']
     });
-  });
-};
 
-App.stopLoad = function (id) {
-  $('#' + id + ' img').remove();
-};
+    var feedChart = new Morris.Bar({
+      element: 'feed-chart',
+      data: [],
+      xkey: 'label',
+      ykeys: ['count'],
+      labels: ['Number']
+    });
+
+    getData({url: "/feed-item-stats"}, itemDayChart);
+    getData({url: "/feed-stats"}, feedChart);
+
+    function getData(filter, chartItem) {
+      $.ajax({
+          type: "GET",
+          dataType: 'json',
+          url: filter.url
+        })
+        .done(function (data) {
+          chartItem.setData(data);
+        })
+        .fail(function () {
+          console.info('Impossible to retrieve data');
+        });
+    }
+  };
+
+  App.open = function (urls) {
+    var listUrls = JSON.parse(urls) || [];
+
+    listUrls.forEach(function (url) {
+      window.open(url);
+    });
+  };
+
+  App.initViewer = function () {
+    $(document).scroll(function () {
+      var cutoff = $(window).scrollTop();
+
+      $('div .row').each(function () {
+        if ($(this).offset().top + $(this).height() > cutoff) {
+          location.hash = '#' + $(this).attr('id');
+          return false;
+        }
+      });
+    });
+  };
+
+  App.stopLoad = function (id) {
+    $('#' + id + ' img').remove();
+  };
+});

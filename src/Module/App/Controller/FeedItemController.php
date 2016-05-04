@@ -28,6 +28,7 @@ class FeedItemController extends AbstractController
         $filterFeed->isEnabled = $request->get('enabled');
         $filterFeed->isApproved = $request->get('approved');
         $filterFeed->isReposted = $request->get('reposted');
+        $filterFeed->isSent = $request->get('sent');
         $filterFeed->isViewed = $request->get('viewed');
         $filterFeed->startDate = $request->get('startDate') ? new \DateTime($request->get('startDate')) : null;
         $filterFeed->endDate = $request->get('endDate') ? new \DateTime($request->get('endDate')) : null;

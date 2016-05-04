@@ -25,4 +25,6 @@ class FeedItem
     public $isApproved;
     /** @var  bool */
     public $isReposted;
+    /** @var  bool */
+    public $isSent;
 }

@@ -41,6 +41,8 @@ class FeedItem
     private $isApproved = false;
     /** @var  bool */
     private $isReposted = false;
+    /** @var bool  */
+    private $isSent = false;
 
     /**
      * @return int
@@ -315,6 +317,22 @@ class FeedItem
     }
 
     /**
+     * @return bool
+     */
+    public function isSent()
+    {
+        return $this->isSent;
+    }
+
+    /**
+     * @param bool $isSent
+     */
+    public function setIsSent($isSent)
+    {
+        $this->isSent = (bool)($isSent);
+    }
+
+    /**
      * @return array
      */
     public function toArray()
@@ -329,6 +347,7 @@ class FeedItem
             'viewed' => intval($this->isViewed),
             'approved' => intval($this->isApproved),
             'reposted' => intval($this->isReposted),
+            'sent' => intval($this->isSent),
         ];
     }
 }

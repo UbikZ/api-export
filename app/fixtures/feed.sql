@@ -89,6 +89,7 @@ CREATE TABLE `feed_item` (
   `is_viewed` TINYINT(1) NOT NULL DEFAULT 0,
   `is_approved` TINYINT(1) NOT NULL DEFAULT 0,
   `is_reposted` TINYINT(1) NOT NULL DEFAULT 0,
+  `is_sent` TINYINT(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_id` (`id`),
   KEY `feed_id` (`feed_id`),

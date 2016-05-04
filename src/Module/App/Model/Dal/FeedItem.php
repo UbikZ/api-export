@@ -55,6 +55,10 @@ class FeedItem extends AbstractDal
             $queryBuilder->andWhere('fi.is_reposted = :is_reposted')->setParameter(':is_reposted', intval($isReposted));
         }
 
+        if (!is_null($isSent = $feedItemFilter->isSent)) {
+            $queryBuilder->andWhere('fi.is_sent = :is_sent')->setParameter(':is_sent', intval($isSent));
+        }
+
         /** @var \DateTime $startDate */
         if ($startDate = $feedItemFilter->startDate) {
             $queryBuilder
@@ -127,6 +131,7 @@ class FeedItem extends AbstractDal
                 'fi.is_viewed',
                 'fi.is_approved',
                 'fi.is_reposted',
+                'fi.is_sent',
             ]))
             ->from(self::TABLE_NAME, 'fi');
         self::parseFilter($queryBuilder, $feedItemFilter, $lazyOptions);
@@ -157,6 +162,7 @@ class FeedItem extends AbstractDal
                     'is_viewed' => ':is_viewed',
                     'is_approved' => ':is_approved',
                     'is_reposted' => ':is_reposted',
+                    'is_sent' => ':is_sent',
                 ])
                 ->setParameters([
                     ':feed_id' => $feedItem->getFeed()->getId(),
@@ -173,6 +179,7 @@ class FeedItem extends AbstractDal
                     ':is_viewed' => $feedItem->isViewed(),
                     ':is_approved' => $feedItem->isApproved(),
                     ':is_reposted' => $feedItem->isReposted(),
+                    ':is_sent' => $feedItem->isSent(),
                 ]);
             self::execute($queryBuilder);
         }
@@ -191,6 +198,7 @@ class FeedItem extends AbstractDal
             ->set('is_viewed', ':is_viewed')
             ->set('is_approved', ':is_approved')
             ->set('is_reposted', ':is_reposted')
+            ->set('is_sent', ':is_sent')
             ->set('comment', ':comment')
             ->where('id = :id')
             ->setParameters([
@@ -198,6 +206,7 @@ class FeedItem extends AbstractDal
                 ':is_viewed' => $feedItem->isViewed(),
                 ':is_approved' => $feedItem->isApproved(),
                 ':is_reposted' => $feedItem->isReposted(),
+                ':is_sent' => $feedItem->isSent(),
                 ':id' => $feedItem->getId(),
                 ':comment' => $feedItem->getComment(),
             ]);

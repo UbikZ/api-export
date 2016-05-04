@@ -64,6 +64,7 @@ class Feed
         $feedItem->setIsViewed(self::get($dal, 'fi_is_viewed'));
         $feedItem->setIsApproved(self::get($dal, 'fi_is_approved'));
         $feedItem->setIsReposted(self::get($dal, 'fi_is_reposted'));
+        $feedItem->setIsSent(self::get($dal, 'fi_is_sent'));
 
         return $feedItem;
     }
