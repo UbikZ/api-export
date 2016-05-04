@@ -22,7 +22,7 @@ function main($argc, $argv = array())
         foreach ($feeds as $feed) {
             $id = $feed['id'];
             $text .= $feed['url'] . ' ' . $feed['comment'] . PHP_EOL;
-            exec("curl --data \"id=$id&sent=1\" $argv[1]/update");
+            exec("curl --data \"id=$id&sent=1\" $argv[1]/update-item");
         }
         $payload['text'] .= $text;
         $sendJson = json_encode($payload);
