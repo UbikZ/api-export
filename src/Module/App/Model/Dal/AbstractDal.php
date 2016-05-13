@@ -32,10 +32,12 @@ abstract class AbstractDal implements InterfaceDal
     {
         $executed = null;
         try {
-            Layout::logger('sql_requests')->info(strtr(
+            /*Layout::logger('sql_requests')->debug(strtr(
                     $queryBuilder->getSQL(),
-                    array_map(function ($el) { return "'".$el."'"; }, $queryBuilder->getParameters()))
-            );
+                    array_map(function ($el) {
+                        return "'" . $el . "'";
+                    }, $queryBuilder->getParameters()))
+            );*/
             $executed = $queryBuilder->execute();
         } catch (\Exception $e) {
             throw new ErrorSQLStatementException($e->getMessage(), $e->getCode(), $e);
@@ -51,7 +53,9 @@ abstract class AbstractDal implements InterfaceDal
      */
     public static function alias(array $params)
     {
-        return array_map(function ($el) { return sprintf('%s as %s', $el, str_replace('.', '_', $el)); }, $params);
+        return array_map(function ($el) {
+            return sprintf('%s as %s', $el, str_replace('.', '_', $el));
+        }, $params);
     }
 
     /**
