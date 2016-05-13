@@ -27,6 +27,7 @@ function main($argc, $argv = array())
                 exec("curl --data \"id=$id&sent=1\" $argv[1]/update-item");
             }
             $payload['text'] .= $text;
+            $payload['unfurl_media'] = false;
             $sendJson = json_encode($payload);
             var_dump($payload);
             exec("curl -X POST --data-urlencode 'payload=$sendJson' $argv[4]");
