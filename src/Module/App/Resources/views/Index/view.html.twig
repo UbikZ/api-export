@@ -7,13 +7,13 @@
                 {% for feed in feeds %}
                     {% if feed.reposted != 1 %}
                         {% if links %}
-                            <a href="{{ feed.url }}">{{ feed.url }}</a>
+                            <a href="{{ feed.url }}">{{ feed.url }}</a><br/>
                         {% else %}
                             <div class="row" id="{{ feed.hash }}">
                                 <div class="col-lg-8">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title">Image</h3><br/>
+                                            <h3 class="panel-title">Image</h3>
                                         </div>
                                         <div class="panel-body">
                                             {% if feed.url matches '{//gfycat.com}' %}
