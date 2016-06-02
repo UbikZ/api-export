@@ -39,7 +39,7 @@ class IndexController extends AbstractController
         $filterFeed = $this->_parseFilter($request);
         $feeds = Manager\FeedItem::get($filterFeed, null, true);
 
-        return $this->render(['feeds' => $feeds]);
+        return $this->render(['feeds' => $feeds, 'links' => (bool) $request->get('links', false)]);
     }
 
     public function openAction(Request $request) {
